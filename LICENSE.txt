@@ -1,0 +1,8 @@
+Copyright (c) 2025 Christopher Lilly
+
+All rights reserved.
+
+This source code and all related files are the exclusive property of Christopher Lilly.
+Unauthorized copying, modification, distribution, or use in any form is strictly prohibited without explicit written permission from the author.
+
+This repository is provided for demonstration purposes only.
