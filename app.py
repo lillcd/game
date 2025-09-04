@@ -6,7 +6,10 @@
 
 import random
 import json
-from google.colab import output
+import streamlit as st
+import streamlit.components.v1 as components
+
+# Next line needs replacing! Plus html injections.
 from IPython.display import display, HTML
 
 # define the Python function FIRST
@@ -45,7 +48,119 @@ rounds = {
 }
 
 
+
+
+
+def render_round():
+    global current_round
+    current_round = random.choice(list(rounds.keys()))
+    # print("🎲 Chosen round:", current_round)
+
+    new_html = html_code
+    for i, (w1, w2) in enumerate(rounds[current_round]['word_pairs'], start=1):
+        new_html = new_html.replace(f"__BLOCK{i}_WORD1__", w1)
+        new_html = new_html.replace(f"__BLOCK{i}_WORD2__", w2)
+
+    new_html = (new_html
+        .replace("__START_WORD__", rounds[current_round]['start_word'])
+        .replace("__END_WORD__",   rounds[current_round]['end_word'])
+    )
+
+    # ✅ just return HTML string
+    return new_html
+
+
+
+
+
+def validate_layout(payload):
+    blocks = payload.get("blocks", [])
+    block_ids = {b["id"] for b in blocks}
+    required = rounds[current_round]['correct_blocks']
+
+    # ✅ check correct set of blocks
+    if set(block_ids) != set(required):
+      st.write("❌ Incorrect")
+      # print(required)
+      # print(block_ids)
+      missing = required - block_ids
+      extras = block_ids - required
+      # if missing: print("Missing:", ", ".join(sorted(missing)))
+      # if extras:  print("Extra:",   ", ".join(sorted(extras)))
+      return {"success": False}
+
+    # valid positions
+    valid_positions_1 = {(0, 240), (80, 320), (-40, 200), (40, 280)}
+    valid_positions_2 = {(240, 0), (320, 80), (280, 40), (360, 120)}
+
+    # coords for block6 + block9
+    coords = {b["id"]: (b["x"], b["y"]) for b in blocks}
+
+    key1 = coords.get(rounds[current_round]['correct_blocks'][0])
+    key2 = coords.get(rounds[current_round]['correct_blocks'][-1])
+
+    # print(f"Block9 at {pos9}")
+
+    if key1 in valid_positions_1 and key2 in valid_positions_2:
+        st.write("✅ Correct!")
+        return {"success": True}
+    else:
+        st.write("❌ Incorrect")
+        # print(key1)
+        return {"success": False}
+
+
+
+# Hidden text_area to receive data from JS
+data_json = st.text_area("Hidden Data", value="", key="hidden_data", label_visibility="collapsed", height=50)
+
+         
+            
+            
+
 html_code = """
+<style>
+body { padding: 0px; }
+.grid-container { display: grid; grid-template-columns: repeat(6, 80px); grid-template-rows: repeat(5, 80px); width: max-content; }
+.grid-cell { width: 80px; height: 80px; background-color: #eee; border: 1px solid #ccc; box-sizing: border-box; position: relative; }
+.draggable { width: 160px; height: 80px; background-color: #2E2E2E; cursor: grab; position: absolute; z-index: 10; border-radius: 7px; user-select: none; transition: transform-origin: center center; transform 0.25s ease; }
+.rotate-handle { width: 16px; height: 16px; background: none; position: absolute; cursor: pointer; z-index: 20; }
+.top-left { top: 0px; left: 0px; }
+.top-right { top: 0px; right: 0px; }
+.bottom-left { bottom: 0px; left: 0px; }
+.bottom-right { bottom: 0px; right: 0px; }
+.wrd { color: #ffffff; font-size: 16px; position: absolute; top: 50%; width: 49%; text-align: center; text-anchor: middle; line-height: 0px; }
+.lwrd { left: 0; }
+.rwrd { right: 0; }
+#arena { width: 100%; height: 820px; }
+#block1 { transform: rotate(9deg); top: 425px; left: 65px; }
+#block2 { transform: rotate(-7deg); top: 420px; left: 300px; }
+#block3 { transform: rotate(-5deg); top: 515px; left: 4px; }
+#block4 { transform: rotate(-44deg); top: 535px; left: 158px; }
+#block5 { transform: rotate(2deg); top: 525px; left: 320px; }
+#block6 { transform: rotate(-1deg); top: 635px; left: 20px; }
+#block7 { transform: rotate(18deg); top: 625px; left: 320px; }
+#block8 { transform: rotate(6deg); top: 730px; left: 55px; }
+#block9 { transform: rotate(26deg); top: 690px; left: 220px; }
+.dvdr { position: absolute; background-color: #ffffff; height: 72px; top: 4px; left: 78px; width: 2px; }
+.strtfnsh { position: absolute; width: 80px; height: 80px; background-color: #2E2E2E; }
+#strt { left: 0px; top: 320px; border-radius: 0px 7px 7px 0px; }
+#fnsh { left: 400px; top: 0px; border-radius: 7px 0px 0px 7px; }
+.strtfnsh .wrd { width: 100% !important; }
+#submitBtn { width: 80px; position: absolute; left: 200px; top: 405px; }
+</style>
+<div id="arena">
+<div class="grid-container" id="grid">
+<!-- Create 30 grid cells -->
+<script>
+for (let i = 0; i < 30; i++) {
+let cell = document.createElement('div');
+cell.className = 'grid-cell';
+document.getElementById('grid').appendChild(cell);
+}
+</script>
+</div>
+<div id="game">
 
 <!-- Start and finish -->
 <div class="strtfnsh" id="strt">
@@ -146,124 +261,9 @@ html_code = """
 <div class="dvdr"></div>
 </div>
 
-
-"""
-
-
-
-def render_round():
-    global current_round
-    current_round = random.choice(list(rounds.keys()))
-    # print("🎲 Chosen round:", current_round)
-
-    new_html = html_code
-    for i, (w1, w2) in enumerate(rounds[current_round]['word_pairs'], start=1):
-        new_html = new_html.replace(f"__BLOCK{i}_WORD1__", w1)
-        new_html = new_html.replace(f"__BLOCK{i}_WORD2__", w2)
-
-    new_html = (new_html
-        .replace("__START_WORD__", rounds[current_round]['start_word'])
-        .replace("__END_WORD__",   rounds[current_round]['end_word'])
-    )
-
-    # ✅ just return HTML string
-    return new_html
-
-
-# make render_round callable from JS
-output.register_callback("render_round", render_round)
-
-
-
-def validate_layout(payload):
-    blocks = payload.get("blocks", [])
-    block_ids = {b["id"] for b in blocks}
-    required = rounds[current_round]['correct_blocks']
-
-    # ✅ check correct set of blocks
-    if set(block_ids) != set(required):
-      st.write("❌ Incorrect")
-      # print(required)
-      # print(block_ids)
-      missing = required - block_ids
-      extras = block_ids - required
-      # if missing: print("Missing:", ", ".join(sorted(missing)))
-      # if extras:  print("Extra:",   ", ".join(sorted(extras)))
-      return {"success": False}
-
-    # valid positions
-    valid_positions_1 = {(0, 240), (80, 320), (-40, 200), (40, 280)}
-    valid_positions_2 = {(240, 0), (320, 80), (280, 40), (360, 120)}
-
-    # coords for block6 + block9
-    coords = {b["id"]: (b["x"], b["y"]) for b in blocks}
-
-    key1 = coords.get(rounds[current_round]['correct_blocks'][0])
-    key2 = coords.get(rounds[current_round]['correct_blocks'][-1])
-
-    # print(f"Block9 at {pos9}")
-
-    if key1 in valid_positions_1 and key2 in valid_positions_2:
-        st.write("✅ Correct!")
-        return {"success": True}
-    else:
-        st.write("❌ Incorrect")
-        # print(key1)
-        return {"success": False}
-
-output.register_callback("validateLayout", validate_layout)
-
-base_html_code = """
-<style>
-body { padding: 0px; }
-.grid-container { display: grid; grid-template-columns: repeat(6, 80px); grid-template-rows: repeat(5, 80px); width: max-content; }
-.grid-cell { width: 80px; height: 80px; background-color: #eee; border: 1px solid #ccc; box-sizing: border-box; position: relative; }
-.draggable { width: 160px; height: 80px; background-color: #2E2E2E; cursor: grab; position: absolute; z-index: 10; border-radius: 7px; user-select: none; transition: transform-origin: center center; transform 0.25s ease; }
-.rotate-handle { width: 16px; height: 16px; background: none; position: absolute; cursor: pointer; z-index: 20; }
-.top-left { top: 0px; left: 0px; }
-.top-right { top: 0px; right: 0px; }
-.bottom-left { bottom: 0px; left: 0px; }
-.bottom-right { bottom: 0px; right: 0px; }
-.wrd { color: #ffffff; font-size: 16px; position: absolute; top: 50%; width: 49%; text-align: center; text-anchor: middle; line-height: 0px; }
-.lwrd { left: 0; }
-.rwrd { right: 0; }
-#arena { width: 100%; height: 820px; }
-#block1 { transform: rotate(9deg); top: 425px; left: 65px; }
-#block2 { transform: rotate(-7deg); top: 420px; left: 300px; }
-#block3 { transform: rotate(-5deg); top: 515px; left: 4px; }
-#block4 { transform: rotate(-44deg); top: 535px; left: 158px; }
-#block5 { transform: rotate(2deg); top: 525px; left: 320px; }
-#block6 { transform: rotate(-1deg); top: 635px; left: 20px; }
-#block7 { transform: rotate(18deg); top: 625px; left: 320px; }
-#block8 { transform: rotate(6deg); top: 730px; left: 55px; }
-#block9 { transform: rotate(26deg); top: 690px; left: 220px; }
-.dvdr { position: absolute; background-color: #ffffff; height: 72px; top: 4px; left: 78px; width: 2px; }
-.strtfnsh { position: absolute; width: 80px; height: 80px; background-color: #2E2E2E; }
-#strt { left: 0px; top: 320px; border-radius: 0px 7px 7px 0px; }
-#fnsh { left: 400px; top: 0px; border-radius: 7px 0px 0px 7px; }
-.strtfnsh .wrd { width: 100% !important; }
-#submitBtn { width: 80px; position: absolute; left: 200px; top: 405px; }
-</style>
-<div id="arena">
-<div class="grid-container" id="grid">
-<!-- Create 30 grid cells -->
-<script>
-for (let i = 0; i < 30; i++) {
-let cell = document.createElement('div');
-cell.className = 'grid-cell';
-document.getElementById('grid').appendChild(cell);
-}
-</script>
-</div>
-<div id="game">
-
-
-
 </div>
 
 </div>
-<button id="submitBtn">Submit</button>
-
 
 <script>
 function initDragDrop() {
@@ -400,14 +400,11 @@ document.addEventListener('mouseup', () => {
   }
 
   activeBlock = null;
-});
-
-document.getElementById("submitBtn").addEventListener("click", async () => {
+  
+  // Update hidden Streamlit textarea with JSON string
   const grid = document.getElementById("grid");
-  const rect = grid.getBoundingClientRect();
-
   const blocks = Array.from(document.querySelectorAll(".block"))
-    .filter(b => {
+  .filter(b => {
       if (!b.style.left || !b.style.top) return false;
       const bx = parseFloat(b.style.left) + b.offsetWidth / 2;
       const by = parseFloat(b.style.top) + b.offsetHeight / 2;
@@ -423,25 +420,52 @@ document.getElementById("submitBtn").addEventListener("click", async () => {
       const by = parseFloat(b.style.top) - rect.top;
       return { id: b.id, x: bx, y: by };
     });
-
-  await google.colab.kernel.invokeFunction("validateLayout", [{ blocks }], {});
+	const streamlitTextarea = window.parent.document.querySelector('textarea[data-testid="stTextArea"]');
+  if(streamlitTextarea) {
+    streamlitTextarea.value = JSON.stringify(blocks);
+    streamlitTextarea.dispatchEvent(new Event('input', { bubbles: true }));
+  }
+  
 });
 
-}
 </script>
 
 """
-display(HTML(base_html_code))
+
+
+
+
+# components.html(base_html_code, height=820)
+
+
+if "show_text" not in st.session_state:
+    st.session_state.show_text = True
+
+if st.button("New game"):
+    st.session_state.show_text = False
+    a_round = render_round()
+    components.html(a_round, height=820)
+
+if st.session_state.show_text:
+    st.write("Welcome to [game name]!")
+
+if st.button("Submit"):
+    if data_json:
+        try:
+            payload = json.loads(data_json)
+            validate_layout(payload)
+        except Exception as e:
+            st.error(f"Invalid JSON data: {e}")
+            
 
 
 # render first round on load
-first = render_round()
-display(HTML(f"""
-<script>
-document.getElementById("game").innerHTML = `{first}`;
-if (typeof window.initDragDrop === "function") {{
-  window.initDragDrop();
-}}
-</script>
-"""))
-
+# first = render_round()
+# display(HTML(f"""
+# <script>
+# document.getElementById("game").innerHTML = `{first}`;
+# if (typeof window.initDragDrop === "function") {{
+#   window.initDragDrop();
+# }}
+# </script>
+# """))
