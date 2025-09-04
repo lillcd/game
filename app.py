@@ -9,8 +9,7 @@ import json
 import streamlit as st
 import streamlit.components.v1 as components
 
-# Next line needs replacing! Plus html injections.
-from IPython.display import display, HTML
+
 
 # define the Python function FIRST
 
