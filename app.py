@@ -113,7 +113,7 @@ def validate_layout(payload):
 # Hidden text_area to receive data from JS
 st.markdown("""
 <style>
-textarea { display: none; }
+.stTextArea { display: none; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -125,7 +125,7 @@ data_json = st.text_area("Hidden Data", value="", key="hidden_data", label_visib
 
 html_code = """
 <style>
-body { padding: 0px; font-family: sans-serif; }
+body { padding: 0px; margin: 0px; font-family: sans-serif; }
 .grid-container { display: grid; grid-template-columns: repeat(6, 80px); grid-template-rows: repeat(5, 80px); width: max-content; }
 .grid-cell { width: 80px; height: 80px; background-color: #eee; border: 1px solid #ccc; box-sizing: border-box; position: relative; }
 .draggable { width: 160px; height: 80px; background-color: #2E2E2E; cursor: grab; position: absolute; z-index: 10; border-radius: 7px; user-select: none; transition: transform-origin: center center; transform 0.25s ease; }
