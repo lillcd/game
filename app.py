@@ -427,13 +427,14 @@ if st.button("New game"):
     st.session_state.show_text = False
     a_round = render_round()
     components.html(a_round, height=820)
+
     if st.button("Submit"):
-    if data_json:
-        try:
-            payload = json.loads(data_json)
-            validate_layout(payload)
-        except Exception as e:
-            st.error(f"Invalid JSON data: {e}")            
+        if data_json:
+            try:
+                payload = json.loads(data_json)
+                validate_layout(payload)
+            except Exception as e:
+                st.error(f"Invalid JSON data: {e}")          
 
 
 # render first round on load
