@@ -271,33 +271,26 @@ document.getElementById('grid').appendChild(cell);
 </div>
 
 <script>
-function initDragDrop() {
-
 const grid = document.getElementById('grid');
 const blocks = document.querySelectorAll('.block');
-
 let activeBlock = null;
 let isDragging = false;
 let dragOffset = { x: 0, y: 0 };
-
 let isRotating = false;
 let rotationStartAngle = 0;
 let liveRotation = 0;
-
 // Store each block’s rotation separately
 const blockState = new Map(); // block -> { rotation }
 
 blocks.forEach(block => {
   blockState.set(block, { rotation: 0 });
-
-  // Rotation handle(s)
+// Rotation handle(s)
   const rotateHandles = block.querySelectorAll('.rotate-handle');
   rotateHandles.forEach(handle => {
     handle.addEventListener('mousedown', (e) => {
       e.preventDefault();
       isRotating = true;
       activeBlock = block;
-
       const rect = block.getBoundingClientRect();
       const centerX = rect.left + rect.width / 2;
       const centerY = rect.top + rect.height / 2;
@@ -307,13 +300,11 @@ blocks.forEach(block => {
       if (rotationStartAngle < 0) rotationStartAngle += 360;
     });
   });
-
-  // Dragging
+// Dragging
   block.addEventListener('mousedown', (e) => {
     if (isRotating) return;
     isDragging = true;
     activeBlock = block;
-
     const rect = block.getBoundingClientRect();
     dragOffset.x = e.clientX - (rect.left + rect.width / 2);
     dragOffset.y = e.clientY - (rect.top + rect.height / 2);
@@ -324,7 +315,6 @@ blocks.forEach(block => {
 // Mouse move: handle drag or rotation
 document.addEventListener('mousemove', (e) => {
   if (!activeBlock) return;
-
   if (isRotating) {
     const rect = activeBlock.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;
@@ -334,10 +324,8 @@ document.addEventListener('mousemove', (e) => {
     let currentAngle = Math.atan2(dy, dx) * (180 / Math.PI);
     if (currentAngle < 0) currentAngle += 360;
     let angleDiff = currentAngle - rotationStartAngle;
-
     const { rotation } = blockState.get(activeBlock);
     liveRotation = (rotation + angleDiff + 360) % 360;
-
     activeBlock.style.transform = `rotate(${liveRotation}deg)`;
   } else if (isDragging) {
     const rect = grid.getBoundingClientRect();
@@ -347,7 +335,6 @@ document.addEventListener('mousemove', (e) => {
     const height = activeBlock.offsetHeight;
     const x = newCenterX - width / 2 - rect.left;
     const y = newCenterY - height / 2 - rect.top;
-
     const { rotation } = blockState.get(activeBlock);
     activeBlock.style.left = x + 'px';
     activeBlock.style.top = y + 'px';
@@ -358,54 +345,41 @@ document.addEventListener('mousemove', (e) => {
 // Mouse up: snap and finalize rotation
 document.addEventListener('mouseup', () => {
   if (!activeBlock) return;
-
   const state = blockState.get(activeBlock);
-
   if (isDragging) {
     const rect = grid.getBoundingClientRect();
     const cellSize = 80;
     let rot = state.rotation % 360;
     if (rot < 0) rot += 360;
-
     let left = parseFloat(activeBlock.style.left) - rect.left || 0;
     let top = parseFloat(activeBlock.style.top) - rect.top || 0;
-
     let offsetX = (rot === 90 || rot === 270) ? 40 : 0;
     let offsetY = (rot === 90 || rot === 270) ? 40 : 0;
-
     const blockWidth = rot % 180 === 0 ? activeBlock.offsetWidth : activeBlock.offsetHeight;
     const blockHeight = rot % 180 === 0 ? activeBlock.offsetHeight : activeBlock.offsetWidth;
-
     const maxX = grid.clientWidth - blockWidth;
     const maxY = (rot === 90 || rot === 270) ? grid.clientHeight - blockHeight + 80 : grid.clientHeight - blockHeight;
     const minY = (rot === 90 || rot === 270) ? 80 : 0;
-
     const gridBottom = grid.clientHeight;
-
-  if (top <= gridBottom) {
+    if (top <= gridBottom) {
     // ✅ Inside grid: snap to nearest cell
-    const snapX = Math.min(maxX, Math.max(0, Math.round((left + offsetX) / cellSize) * cellSize));
-    const snapY = Math.min(maxY, Math.max(minY, Math.round((top + offsetY) / cellSize) * cellSize));
-
-    activeBlock.style.left = (snapX + rect.left - offsetX) + 'px';
-    activeBlock.style.top = (snapY + rect.top - offsetY) + 'px';
-  } else {
+      const snapX = Math.min(maxX, Math.max(0, Math.round((left + offsetX) / cellSize) * cellSize));
+      const snapY = Math.min(maxY, Math.max(minY, Math.round((top + offsetY) / cellSize) * cellSize));
+      activeBlock.style.left = (snapX + rect.left - offsetX) + 'px';
+      activeBlock.style.top = (snapY + rect.top - offsetY) + 'px';
+    } else {
     // ❌ Below grid: leave it where the user dropped it
-    activeBlock.style.left = (left + rect.left) + 'px';
-    activeBlock.style.top = (top + rect.top) + 'px';
-  }
-
+      activeBlock.style.left = (left + rect.left) + 'px';
+      activeBlock.style.top = (top + rect.top) + 'px';
+    }
     isDragging = false;
   }
-
   if (isRotating) {
     state.rotation = Math.round(liveRotation / 90) * 90;
     activeBlock.style.transform = `rotate(${state.rotation}deg)`;
     isRotating = false;
   }
-
   activeBlock = null;
-  
   // Update hidden Streamlit textarea with JSON string
   const grid = document.getElementById("grid");
   const blocks = Array.from(document.querySelectorAll(".block"))
@@ -426,22 +400,14 @@ document.addEventListener('mouseup', () => {
       return { id: b.id, x: bx, y: by };
     });
 	const streamlitTextarea = window.parent.document.querySelector('textarea[data-testid="stTextArea"]');
-  if(streamlitTextarea) {
-    streamlitTextarea.value = JSON.stringify(blocks);
-    streamlitTextarea.dispatchEvent(new Event('input', { bubbles: true }));
-  }
-  
+	if(streamlitTextarea) {
+      streamlitTextarea.value = JSON.stringify(blocks);
+      streamlitTextarea.dispatchEvent(new Event('input', { bubbles: true }));
+      }
 });
 
 </script>
 
-# initialise
-
-<script>
-if (typeof window.initDragDrop === "function") {
-window.initDragDrop();
-}
-</script>
 
 """
 
@@ -454,22 +420,20 @@ window.initDragDrop();
 if "show_text" not in st.session_state:
     st.session_state.show_text = True
 
+if st.session_state.show_text:
+    st.write("Welcome to [game name]!")
+    
 if st.button("New game"):
     st.session_state.show_text = False
     a_round = render_round()
     components.html(a_round, height=820)
-
-if st.session_state.show_text:
-    st.write("Welcome to [game name]!")
-
-if st.button("Submit"):
+    if st.button("Submit"):
     if data_json:
         try:
             payload = json.loads(data_json)
             validate_layout(payload)
         except Exception as e:
-            st.error(f"Invalid JSON data: {e}")
-            
+            st.error(f"Invalid JSON data: {e}")            
 
 
 # render first round on load
