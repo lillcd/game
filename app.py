@@ -10,9 +10,6 @@ import streamlit as st
 import streamlit.components.v1 as components
 
 
-
-# define the Python function FIRST
-
 rounds = {
     "r1": {
         "word_pairs": [("Fax","History"),("Finger","Grass"),("Break","Car"),("Spain","Plum"),("Chair","Green"),("Trick","Bow"),("Camp","Wind"),("Coffee","Happy"),("Puppet","New")],
@@ -43,6 +40,18 @@ rounds = {
         "correct_blocks": ["block5","block8","block1","block7"],
         "start_word": "Iron",
         "end_word":   "Nevada",
+    },
+    "r6": {
+        "word_pairs": [("Away","War"),("Small","County"),("Enough","Inner"),("Sergeant","Miami"),("Dust","MC"),("Oak","Eleven"),("Paris","Nissan"),("Tesla","Cloud"),("Captain","Monkey")],
+        "correct_blocks": ["block4","block9","block1","block5"],
+        "start_word": "Fire",
+        "end_word":   "Head",
+    },
+    "r7": {
+        "word_pairs": [("Sonic","Leg"),("Pass","Hell's"),("For","Fifty"),("Doctor","French"),("MBE","Port"),("Abroad","Guest"),("Lizard","Albert"),("Counter","Under"),("Greek","Double")],
+        "correct_blocks": ["block7","block2","block8","block6"],
+        "start_word": "Airport",
+        "end_word":   "Eyes",
     }
 }
 
@@ -54,18 +63,14 @@ def render_round():
     global current_round
     current_round = random.choice(list(rounds.keys()))
     # print("🎲 Chosen round:", current_round)
-
     new_html = html_code
     for i, (w1, w2) in enumerate(rounds[current_round]['word_pairs'], start=1):
         new_html = new_html.replace(f"__BLOCK{i}_WORD1__", w1)
         new_html = new_html.replace(f"__BLOCK{i}_WORD2__", w2)
-
     new_html = (new_html
         .replace("__START_WORD__", rounds[current_round]['start_word'])
         .replace("__END_WORD__",   rounds[current_round]['end_word'])
     )
-
-    # ✅ just return HTML string
     return new_html
 
 
@@ -76,7 +81,6 @@ def validate_layout(payload):
     blocks = payload.get("blocks", [])
     block_ids = {b["id"] for b in blocks}
     required = rounds[current_round]['correct_blocks']
-
     # ✅ check correct set of blocks
     if set(block_ids) != set(required):
       st.write("❌ Incorrect")
@@ -87,19 +91,12 @@ def validate_layout(payload):
       # if missing: print("Missing:", ", ".join(sorted(missing)))
       # if extras:  print("Extra:",   ", ".join(sorted(extras)))
       return {"success": False}
-
     # valid positions
     valid_positions_1 = {(0, 240), (80, 320), (-40, 200), (40, 280)}
     valid_positions_2 = {(240, 0), (320, 80), (280, 40), (360, 120)}
-
-    # coords for block6 + block9
     coords = {b["id"]: (b["x"], b["y"]) for b in blocks}
-
     key1 = coords.get(rounds[current_round]['correct_blocks'][0])
     key2 = coords.get(rounds[current_round]['correct_blocks'][-1])
-
-    # print(f"Block9 at {pos9}")
-
     if key1 in valid_positions_1 and key2 in valid_positions_2:
         st.write("✅ Correct!")
         return {"success": True}
@@ -166,7 +163,6 @@ document.getElementById('grid').appendChild(cell);
 </script>
 </div>
 <div id="game">
-
 <!-- Start and finish -->
 <div class="strtfnsh" id="strt">
 <div class="wrd rwrd">__START_WORD__</div>
@@ -174,7 +170,6 @@ document.getElementById('grid').appendChild(cell);
 <div class="strtfnsh" id="fnsh">
 <div class="wrd rwrd">__END_WORD__</div>
 </div>
-
 <!-- Draggable blocks -->
 <div class="draggable block" id="block1" draggable="true">
 <div class="rotate-handle top-left"></div>
@@ -185,7 +180,6 @@ document.getElementById('grid').appendChild(cell);
 <div class="wrd rwrd">__BLOCK1_WORD2__</div>
 <div class="dvdr"></div>
 </div>
-
 <div class="draggable block" id="block2" draggable="true">
 <div class="rotate-handle top-left"></div>
 <div class="rotate-handle top-right"></div>
@@ -195,7 +189,6 @@ document.getElementById('grid').appendChild(cell);
 <div class="wrd rwrd">__BLOCK2_WORD2__</div>
 <div class="dvdr"></div>
 </div>
-
 <div class="draggable block" id="block3" draggable="true">
 <div class="rotate-handle top-left"></div>
 <div class="rotate-handle top-right"></div>
@@ -205,7 +198,6 @@ document.getElementById('grid').appendChild(cell);
 <div class="wrd rwrd">__BLOCK3_WORD2__</div>
 <div class="dvdr"></div>
 </div>
-
 <div class="draggable block" id="block4" draggable="true">
 <div class="rotate-handle top-left"></div>
 <div class="rotate-handle top-right"></div>
@@ -215,7 +207,6 @@ document.getElementById('grid').appendChild(cell);
 <div class="wrd rwrd">__BLOCK4_WORD2__</div>
 <div class="dvdr"></div>
 </div>
-
 <div class="draggable block" id="block5" draggable="true">
 <div class="rotate-handle top-left"></div>
 <div class="rotate-handle top-right"></div>
@@ -225,7 +216,6 @@ document.getElementById('grid').appendChild(cell);
 <div class="wrd rwrd">__BLOCK5_WORD2__</div>
 <div class="dvdr"></div>
 </div>
-
 <div class="draggable block" id="block6" draggable="true">
 <div class="rotate-handle top-left"></div>
 <div class="rotate-handle top-right"></div>
@@ -235,7 +225,6 @@ document.getElementById('grid').appendChild(cell);
 <div class="wrd rwrd">__BLOCK6_WORD2__</div>
 <div class="dvdr"></div>
 </div>
-
 <div class="draggable block" id="block7" draggable="true">
 <div class="rotate-handle top-left"></div>
 <div class="rotate-handle top-right"></div>
@@ -245,7 +234,6 @@ document.getElementById('grid').appendChild(cell);
 <div class="wrd rwrd">__BLOCK7_WORD2__</div>
 <div class="dvdr"></div>
 </div>
-
 <div class="draggable block" id="block8" draggable="true">
 <div class="rotate-handle top-left"></div>
 <div class="rotate-handle top-right"></div>
@@ -255,7 +243,6 @@ document.getElementById('grid').appendChild(cell);
 <div class="wrd rwrd">__BLOCK8_WORD2__</div>
 <div class="dvdr"></div>
 </div>
-
 <div class="draggable block" id="block9" draggable="true">
 <div class="rotate-handle top-left"></div>
 <div class="rotate-handle top-right"></div>
@@ -265,9 +252,7 @@ document.getElementById('grid').appendChild(cell);
 <div class="wrd rwrd">__BLOCK9_WORD2__</div>
 <div class="dvdr"></div>
 </div>
-
 </div>
-
 </div>
 
 <script>
@@ -302,6 +287,7 @@ blocks.forEach(block => {
   });
 // Dragging
   block.addEventListener('mousedown', (e) => {
+    console.log("mousedown fired");
     if (isRotating) return;
     isDragging = true;
     activeBlock = block;
@@ -344,6 +330,7 @@ document.addEventListener('mousemove', (e) => {
 
 // Mouse up: snap and finalize rotation
 document.addEventListener('mouseup', () => {
+  console.log("mouseup fired");
   if (!activeBlock) return;
   const state = blockState.get(activeBlock);
   if (isDragging) {
@@ -403,25 +390,22 @@ document.addEventListener('mouseup', () => {
 	if(streamlitTextarea) {
       streamlitTextarea.value = JSON.stringify(blocks);
       streamlitTextarea.dispatchEvent(new Event('input', { bubbles: true }));
-      }
+    }
 });
 
 </script>
-
 
 """
 
 
 
 
-# components.html(base_html_code, height=820)
-
-
 if "show_text" not in st.session_state:
     st.session_state.show_text = True
 
 if st.session_state.show_text:
-    st.write("Welcome to [game name]!")
+    st.title("💡 Welcome to the game!")
+    st.write("Make your way across the board from left to right by dragging and dropping the dominoes.")
     
 if st.button("New game"):
     st.session_state.show_text = False
@@ -435,15 +419,3 @@ if st.button("New game"):
                 validate_layout(payload)
             except Exception as e:
                 st.error(f"Invalid JSON data: {e}")          
-
-
-# render first round on load
-# first = render_round()
-# display(HTML(f"""
-# <script>
-# document.getElementById("game").innerHTML = `{first}`;
-# if (typeof window.initDragDrop === "function") {{
-#   window.initDragDrop();
-# }}
-# </script>
-# """))
