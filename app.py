@@ -442,7 +442,7 @@ function handleEnd(e) {
       streamlitTextarea.value = JSON.stringify(blocks);
       streamlitTextarea.dispatchEvent(new Event('input', { bubbles: true }));
     }
-});
+}
 document.addEventListener('mouseup', handleEnd);
 document.addEventListener('touchend', handleEnd);
 
