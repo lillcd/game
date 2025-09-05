@@ -322,8 +322,8 @@ function handleMove(e) {
     const rect = activeBlock.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;
     const centerY = rect.top + rect.height / 2;
-    const dx = e.clientX - centerX;
-    const dy = e.clientY - centerY;
+    const dx = clientX - centerX;
+    const dy = clientY - centerY;
     let currentAngle = Math.atan2(dy, dx) * (180 / Math.PI);
     if (currentAngle < 0) currentAngle += 360;
     let angleDiff = currentAngle - rotationStartAngle;
@@ -332,8 +332,8 @@ function handleMove(e) {
     activeBlock.style.transform = `rotate(${liveRotation}deg)`;
   } else if (isDragging) {
     const rect = grid.getBoundingClientRect();
-    const newCenterX = e.clientX - dragOffset.x;
-    const newCenterY = e.clientY - dragOffset.y;
+    const newCenterX = clientX - dragOffset.x;
+    const newCenterY = clientY - dragOffset.y;
     const width = activeBlock.offsetWidth;
     const height = activeBlock.offsetHeight;
     const x = newCenterX - width / 2 - rect.left;
@@ -343,7 +343,7 @@ function handleMove(e) {
     activeBlock.style.top = y + 'px';
     activeBlock.style.transform = `rotate(${rotation}deg)`;
   }
-});
+}
 document.addEventListener('mousemove', handleMove);
 document.addEventListener('touchmove', handleMove, { passive: false });
 
