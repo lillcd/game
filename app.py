@@ -264,6 +264,7 @@ document.getElementById('grid').appendChild(cell);
 
 <script>
 const grid = document.getElementById('grid');
+const rect = grid.getBoundingClientRect();
 const blocks = document.querySelectorAll('.block');
 let activeBlock = null;
 let isDragging = false;
@@ -353,7 +354,6 @@ document.addEventListener('mouseup', () => {
   if (!activeBlock) return;
   const state = blockState.get(activeBlock);
   if (isDragging) {
-    const rect = grid.getBoundingClientRect();
     const cellSize = 80;
     let rot = state.rotation % 360;
     if (rot < 0) rot += 360;
