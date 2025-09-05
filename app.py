@@ -64,6 +64,12 @@ rounds = {
         "correct_blocks": ["block3","block1","block6","block9"],
         "start_word": "Round",
         "end_word":   "Bar",
+    },
+    "r10": {
+        "word_pairs": [("South","Cold"),("Dread","Freaky"),("Addams","Super"),("Tea","Mars"),("X","Harris"),("Ad","Cyber"),("Rake","Magnolia"),("Tomb","Jaw"),("Blues","Ash")],
+        "correct_blocks": ["block2","block6","block9","block3"],
+        "start_word": "Ski",
+        "end_word":   "Job",
     }
 }
 
@@ -437,7 +443,9 @@ function handleEnd(e) {
       const by = parseFloat(b.style.top) - rect.top;
       return { id: b.id, x: bx, y: by };
     });
-	const streamlitTextarea = window.parent.document.querySelector('textarea[data-testid="stTextArea"]');
+	console.log("Updating textarea");
+	const wrapper = window.parent.document.querySelector('div[data-testid="stTextArea"]');
+	const streamlitTextarea = wrapper ? wrapper.querySelector('textarea') : null;
 	if(streamlitTextarea) {
       streamlitTextarea.value = JSON.stringify(blocks);
       streamlitTextarea.dispatchEvent(new Event('input', { bubbles: true }));
