@@ -418,9 +418,9 @@ function handleEnd(e) {
   }
   activeBlock = null;
   // Update hidden Streamlit textarea with JSON string
-  const blocks = Array.from(document.querySelectorAll(".block"))
   const grid = document.getElementById("grid");
   const rect = grid.getBoundingClientRect();
+  const blocks = Array.from(document.querySelectorAll(".block"))
   .filter(b => {
       if (!b.style.left || !b.style.top) return false;
       const bx = parseFloat(b.style.left) + b.offsetWidth / 2;
