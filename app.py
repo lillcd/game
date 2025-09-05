@@ -66,7 +66,7 @@ rounds = {
         "end_word":   "Bar",
     },
     "r10": {
-        "word_pairs": [("South","Cold"),("Dread","Freaky"),("Addams","Super"),("Tea","Mars"),("X","Harris"),("Ad","Cyber"),("Rake","Magnolia"),("Tomb","Jaw"),("Blues","Ash")],
+        "word_pairs": [("South","Warm"),("Dread","Freaky"),("Addams","Super"),("Snickers","Loop"),("ABC","Bridge"),("Ad","Cyber"),("Tunnel","Keyboard"),("Hip","Arch"),("Blues","Ash")],
         "correct_blocks": ["block2","block6","block9","block3"],
         "start_word": "Ski",
         "end_word":   "Job",
@@ -111,8 +111,8 @@ def validate_layout(payload):
       # if extras:  print("Extra:",   ", ".join(sorted(extras)))
       return {"success": False}
     # valid positions
-    valid_positions_1 = {(0, 240), (80, 320), (-40, 200), (40, 280)}
-    valid_positions_2 = {(240, 0), (320, 80), (280, 40), (360, 120)}
+    valid_positions_1 = {(0, 180), (60, 240), (-30, 150), (30, 210)}
+    valid_positions_2 = {(180, 0), (240, 60), (210, 30), (270, 90)}
     coords = {b["id"]: (b["x"], b["y"]) for b in blocks}
     key1 = coords.get(rounds[current_round]['correct_blocks'][0])
     key2 = coords.get(rounds[current_round]['correct_blocks'][-1])
@@ -127,11 +127,9 @@ def validate_layout(payload):
 
 
 # Hidden text_area to receive data from JS
-# st.markdown("""
-# <style>
-# .stTextArea { display: none; }
-# </style>
-# """, unsafe_allow_html=True)
+st.markdown("""
+<style>.stTextArea { display: none; }</style>
+""", unsafe_allow_html=True)
 
 data_json = st.text_area("Hidden Data", value="", key="hidden_data", label_visibility="collapsed", height=50)
 
@@ -142,15 +140,15 @@ data_json = st.text_area("Hidden Data", value="", key="hidden_data", label_visib
 html_code = """
 <style>
 body { padding: 0px; margin: 0px; font-family: sans-serif; }
-.grid-container { display: grid; grid-template-columns: repeat(6, 80px); grid-template-rows: repeat(5, 80px); width: max-content; }
-.grid-cell { width: 80px; height: 80px; background-color: #eee; border: 1px solid #ccc; box-sizing: border-box; position: relative; }
-.draggable { width: 160px; height: 80px; background-color: #2E2E2E; cursor: grab; position: absolute; z-index: 10; border-radius: 7px; user-select: none; transition: transform-origin: center center; transform 0.25s ease; }
+.grid-container { display: grid; grid-template-columns: repeat(6, 60px); grid-template-rows: repeat(5, 60px); width: max-content; }
+.grid-cell { width: 60px; height: 60px; background-color: #eee; border: 1px solid #ccc; box-sizing: border-box; position: relative; }
+.draggable { width: 120px; height: 60px; background-color: #2E2E2E; cursor: grab; position: absolute; z-index: 10; border-radius: 7px; user-select: none; transition: transform-origin: center center; transform 0.25s ease; }
 .rotate-handle { width: 16px; height: 16px; background: none; position: absolute; cursor: pointer; z-index: 20; }
 .top-left { top: 0px; left: 0px; }
 .top-right { top: 0px; right: 0px; }
 .bottom-left { bottom: 0px; left: 0px; }
 .bottom-right { bottom: 0px; right: 0px; }
-.wrd { color: #ffffff; font-size: 16px; position: absolute; top: 50%; width: 49%; text-align: center; text-anchor: middle; line-height: 0px; }
+.wrd { color: #ffffff; font-size: 15px; position: absolute; top: 50%; width: 49%; text-align: center; text-anchor: middle; line-height: 0px; }
 .lwrd { left: 0; }
 .rwrd { right: 0; }
 #arena { width: 100%; height: 820px; }
@@ -163,12 +161,11 @@ body { padding: 0px; margin: 0px; font-family: sans-serif; }
 #block7 { transform: rotate(18deg); top: 625px; left: 320px; }
 #block8 { transform: rotate(6deg); top: 730px; left: 55px; }
 #block9 { transform: rotate(26deg); top: 690px; left: 220px; }
-.dvdr { position: absolute; background-color: #ffffff; height: 72px; top: 4px; left: 78px; width: 2px; }
-.strtfnsh { position: absolute; width: 80px; height: 80px; background-color: #2E2E2E; }
-#strt { left: 0px; top: 320px; border-radius: 0px 7px 7px 0px; }
-#fnsh { left: 400px; top: 0px; border-radius: 7px 0px 0px 7px; }
+.dvdr { position: absolute; background-color: #ffffff; height: 52px; top: 4px; left: 58px; width: 2px; }
+.strtfnsh { position: absolute; width: 60px; height: 60px; background-color: #2E2E2E; }
+#strt { left: 0px; top: 240px; border-radius: 0px 7px 7px 0px; }
+#fnsh { left: 300px; top: 0px; border-radius: 7px 0px 0px 7px; }
 .strtfnsh .wrd { width: 100% !important; }
-#submitBtn { width: 80px; position: absolute; left: 200px; top: 405px; }
 </style>
 <div id="arena">
 <div class="grid-container" id="grid">
@@ -389,20 +386,20 @@ function handleEnd(e) {
   if (!activeBlock) return;
   const state = blockState.get(activeBlock);
   if (isDragging) {
-    const cellSize = 80;
+    const cellSize = 60;
     let rot = state.rotation % 360;
     if (rot < 0) rot += 360;
     const grid = document.getElementById("grid");
     const rect = grid.getBoundingClientRect();
     let left = parseFloat(activeBlock.style.left) - rect.left || 0;
     let top = parseFloat(activeBlock.style.top) - rect.top || 0;
-    let offsetX = (rot === 90 || rot === 270) ? 40 : 0;
-    let offsetY = (rot === 90 || rot === 270) ? 40 : 0;
+    let offsetX = (rot === 90 || rot === 270) ? 30 : 0;
+    let offsetY = (rot === 90 || rot === 270) ? 30 : 0;
     const blockWidth = rot % 180 === 0 ? activeBlock.offsetWidth : activeBlock.offsetHeight;
     const blockHeight = rot % 180 === 0 ? activeBlock.offsetHeight : activeBlock.offsetWidth;
     const maxX = grid.clientWidth - blockWidth;
-    const maxY = (rot === 90 || rot === 270) ? grid.clientHeight - blockHeight + 80 : grid.clientHeight - blockHeight;
-    const minY = (rot === 90 || rot === 270) ? 80 : 0;
+    const maxY = (rot === 90 || rot === 270) ? grid.clientHeight - blockHeight + 60 : grid.clientHeight - blockHeight;
+    const minY = (rot === 90 || rot === 270) ? 60 : 0;
     const gridBottom = grid.clientHeight;
     if (top <= gridBottom) {
     // ✅ Inside grid: snap to nearest cell
@@ -469,13 +466,13 @@ if st.button("New game"):
     a_round = render_round()
     components.html(a_round, height=820)
 
-    if st.button("Submit"):
-        if data_json:
-            try:
-                payload = json.loads(data_json)
-                validate_layout(payload)
-            except Exception as e:
-                st.error(f"Invalid JSON data: {e}")          
+if st.button("Submit"):
+    if data_json:
+        try:
+            payload = json.loads(data_json)
+            validate_layout(payload)
+        except Exception as e:
+            st.error(f"Invalid JSON data: {e}")          
                 
 if st.session_state.show_text:
     st.title("💡 Welcome to the game!")
