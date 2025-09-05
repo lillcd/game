@@ -148,19 +148,19 @@ body { padding: 0px; margin: 0px; font-family: sans-serif; }
 .top-right { top: 0px; right: 0px; }
 .bottom-left { bottom: 0px; left: 0px; }
 .bottom-right { bottom: 0px; right: 0px; }
-.wrd { color: #ffffff; font-size: 15px; position: absolute; top: 50%; width: 49%; text-align: center; text-anchor: middle; line-height: 0px; }
+.wrd { color: #ffffff; font-size: 14px; position: absolute; top: 50%; width: 49%; text-align: center; text-anchor: middle; line-height: 0px; }
 .lwrd { left: 0; }
 .rwrd { right: 0; }
-#arena { width: 100%; height: 820px; }
-#block1 { transform: rotate(9deg); top: 425px; left: 65px; }
-#block2 { transform: rotate(-7deg); top: 420px; left: 300px; }
-#block3 { transform: rotate(-5deg); top: 515px; left: 4px; }
-#block4 { transform: rotate(-44deg); top: 535px; left: 158px; }
-#block5 { transform: rotate(2deg); top: 525px; left: 320px; }
-#block6 { transform: rotate(-1deg); top: 635px; left: 20px; }
-#block7 { transform: rotate(18deg); top: 625px; left: 320px; }
-#block8 { transform: rotate(6deg); top: 730px; left: 55px; }
-#block9 { transform: rotate(26deg); top: 690px; left: 220px; }
+#arena { width: 100%; height: 660px; }
+#block1 { transform: rotate(9deg); top: 325px; left: 55px; }
+#block2 { transform: rotate(-7deg); top: 315px; left: 200px; }
+#block3 { transform: rotate(-5deg); top: 400px; left: 3px; }
+#block4 { transform: rotate(-44deg); top: 415px; left: 120px; }
+#block5 { transform: rotate(2deg); top: 525px; left: 240px; }
+#block6 { transform: rotate(-1deg); top: 495px; left: 20px; }
+#block7 { transform: rotate(18deg); top: 520px; left: 220px; }
+#block8 { transform: rotate(6deg); top: 570px; left: 8px; }
+#block9 { transform: rotate(26deg); top: 570px; left: 150px; }
 .dvdr { position: absolute; background-color: #ffffff; height: 52px; top: 4px; left: 58px; width: 2px; }
 .strtfnsh { position: absolute; width: 60px; height: 60px; background-color: #2E2E2E; }
 #strt { left: 0px; top: 240px; border-radius: 0px 7px 7px 0px; }
@@ -464,7 +464,7 @@ if "show_text" not in st.session_state:
 if st.button("New game"):
     st.session_state.show_text = False
     a_round = render_round()
-    components.html(a_round, height=820)
+    components.html(a_round, height=660)
 
 if st.button("Submit"):
     if data_json:
