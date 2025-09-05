@@ -58,6 +58,12 @@ rounds = {
         "correct_blocks": ["block7","block2","block8","block6"],
         "start_word": "After",
         "end_word":   "Questions",
+    },
+    "r9": {
+        "word_pairs": [("Berry","Cold"),("West","News"),("Reliant","Golden"),("Tea","Mars"),("X","Harris"),("Play","Theo"),("Rake","Magnolia"),("Tomb","Jaw"),("Teeth","Sheryl")],
+        "correct_blocks": ["block3","block1","block6","block9"],
+        "start_word": "Round",
+        "end_word":   "Bar",
     }
 }
 
@@ -372,7 +378,7 @@ document.addEventListener('mousemove', handleMove);
 document.addEventListener('touchmove', handleMove, { passive: false });
 
 // Mouse up: snap and finalize rotation
-document.addEventListener('mouseup', () => {
+function handleEnd(e) {
   console.log("mouseup fired");
   if (!activeBlock) return;
   const state = blockState.get(activeBlock);
@@ -433,6 +439,8 @@ document.addEventListener('mouseup', () => {
       streamlitTextarea.dispatchEvent(new Event('input', { bubbles: true }));
     }
 });
+document.addEventListener('mouseup', handleEnd);
+document.addEventListener('touchend', handleEnd);
 
 </script>
 
