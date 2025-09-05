@@ -52,6 +52,12 @@ rounds = {
         "correct_blocks": ["block7","block2","block8","block6"],
         "start_word": "Airport",
         "end_word":   "Eyes",
+    },
+    "r8": {
+        "word_pairs": [("Ball","Secret"),("South","Police"),("Guys","Matchbox"),("Coffee","Neptune"),("Sisters","U"),("Clarity","People"),("Gecko","Witty"),("CV","Famous"),("Shampoo","Arm")],
+        "correct_blocks": ["block7","block2","block8","block6"],
+        "start_word": "After",
+        "end_word":   "Questions",
     }
 }
 
@@ -368,7 +374,6 @@ document.addEventListener('mouseup', () => {
   }
   activeBlock = null;
   // Update hidden Streamlit textarea with JSON string
-  const grid = document.getElementById("grid");
   const blocks = Array.from(document.querySelectorAll(".block"))
   .filter(b => {
       if (!b.style.left || !b.style.top) return false;
