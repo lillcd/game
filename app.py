@@ -280,30 +280,53 @@ blocks.forEach(block => {
 // Rotation handle(s)
   const rotateHandles = block.querySelectorAll('.rotate-handle');
   rotateHandles.forEach(handle => {
-    handle.addEventListener('mousedown', (e) => {
+    const handleRotateStart = (e) => {
       e.preventDefault();
       isRotating = true;
       activeBlock = block;
+      let clientX, clientY;
+      if (e.type === 'touchstart') {
+        const touch = e.touches[0];
+        clientX = touch.clientX;
+        clientY = touch.clientY;
+        if (e.cancelable) e.preventDefault();
+      } else {
+        clientX = e.clientX;
+        clientY = e.clientY;
+      }
       const rect = block.getBoundingClientRect();
       const centerX = rect.left + rect.width / 2;
       const centerY = rect.top + rect.height / 2;
-      const dx = e.clientX - centerX;
-      const dy = e.clientY - centerY;
+      const dx = clientX - centerX;
+      const dy = clientY - centerY;
       rotationStartAngle = Math.atan2(dy, dx) * (180 / Math.PI);
       if (rotationStartAngle < 0) rotationStartAngle += 360;
-    });
+    };
+    handle.addEventListener('mousedown', handleRotateStart);
+    handle.addEventListener('touchstart', handleRotateStart, { passive: false });
   });
 // Dragging
-  block.addEventListener('mousedown', (e) => {
-    console.log("mousedown fired");
+  const handleDragStart = (e) => {
+    console.log("drag start fired");
     if (isRotating) return;
     isDragging = true;
     activeBlock = block;
+    let clientX, clientY;
+    if (e.type === 'touchstart') {
+      const touch = e.touches[0];
+      clientX = touch.clientX;
+      clientY = touch.clientY;
+      if (e.cancelable) e.preventDefault();
+    } else {
+      clientX = e.clientX;
+      clientY = e.clientY;
+    }
     const rect = block.getBoundingClientRect();
-    dragOffset.x = e.clientX - (rect.left + rect.width / 2);
-    dragOffset.y = e.clientY - (rect.top + rect.height / 2);
-    e.preventDefault();
-  });
+    dragOffset.x = clientX - (rect.left + rect.width / 2);
+    dragOffset.y = clientY - (rect.top + rect.height / 2);
+  };
+  block.addEventListener('mousedown', handleDragStart);
+  block.addEventListener('touchstart', handleDragStart, { passive: false });
 });
 
 // Mouse move: handle drag or rotation
