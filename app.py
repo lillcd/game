@@ -84,6 +84,7 @@ def render_round():
 
 
 def validate_layout(payload):
+    console.log("validation started");
     blocks = payload.get("blocks", [])
     block_ids = {b["id"] for b in blocks}
     required = rounds[current_round]['correct_blocks']
@@ -114,11 +115,11 @@ def validate_layout(payload):
 
 
 # Hidden text_area to receive data from JS
-st.markdown("""
-<style>
-.stTextArea { display: none; }
-</style>
-""", unsafe_allow_html=True)
+# st.markdown("""
+# <style>
+# .stTextArea { display: none; }
+# </style>
+# """, unsafe_allow_html=True)
 
 data_json = st.text_area("Hidden Data", value="", key="hidden_data", label_visibility="collapsed", height=50)
 
@@ -305,8 +306,18 @@ blocks.forEach(block => {
 });
 
 // Mouse move: handle drag or rotation
-document.addEventListener('mousemove', (e) => {
+function handleMove(e) {
   if (!activeBlock) return;
+  let clientX, clientY;
+  if (e.type === 'touchmove') {
+    const touch = e.touches[0];
+    clientX = touch.clientX;
+    clientY = touch.clientY;
+    if (e.cancelable) e.preventDefault(); // optional: prevent scrolling
+  } else {
+    clientX = e.clientX;
+    clientY = e.clientY;
+  }
   if (isRotating) {
     const rect = activeBlock.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;
@@ -333,6 +344,8 @@ document.addEventListener('mousemove', (e) => {
     activeBlock.style.transform = `rotate(${rotation}deg)`;
   }
 });
+document.addEventListener('mousemove', handleMove);
+document.addEventListener('touchmove', handleMove, { passive: false });
 
 // Mouse up: snap and finalize rotation
 document.addEventListener('mouseup', () => {
@@ -407,10 +420,6 @@ document.addEventListener('mouseup', () => {
 
 if "show_text" not in st.session_state:
     st.session_state.show_text = True
-
-if st.session_state.show_text:
-    st.title("💡 Welcome to the game!")
-    st.write("Make your way across the board from left to right by dragging and dropping the dominoes.")
     
 if st.button("New game"):
     st.session_state.show_text = False
@@ -424,3 +433,7 @@ if st.button("New game"):
                 validate_layout(payload)
             except Exception as e:
                 st.error(f"Invalid JSON data: {e}")          
+                
+if st.session_state.show_text:
+    st.title("💡 Welcome to the game!")
+    st.write("Make your way across the board from left to right by dragging and dropping the dominoes.")
