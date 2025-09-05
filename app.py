@@ -60,7 +60,7 @@ rounds = {
         "end_word":   "Questions",
     },
     "r9": {
-        "word_pairs": [("Berry","Cold"),("West","News"),("Reliant","Golden"),("Tea","Mars"),("X","Harris"),("Play","Theo"),("Rake","Magnolia"),("Tomb","Jaw"),("Teeth","Sheryl")],
+        "word_pairs": [("Berry","Cold"),("West","News"),("Reliant","Golden"),("Tea","Mars"),("X","Harris"),("Teeth","Turtle"),("Rake","Magnolia"),("Tomb","Jaw"),("Tail","Sheryl")],
         "correct_blocks": ["block3","block1","block6","block9"],
         "start_word": "Round",
         "end_word":   "Bar",
@@ -386,6 +386,8 @@ function handleEnd(e) {
     const cellSize = 80;
     let rot = state.rotation % 360;
     if (rot < 0) rot += 360;
+    const grid = document.getElementById("grid");
+    const rect = grid.getBoundingClientRect();
     let left = parseFloat(activeBlock.style.left) - rect.left || 0;
     let top = parseFloat(activeBlock.style.top) - rect.top || 0;
     let offsetX = (rot === 90 || rot === 270) ? 40 : 0;
@@ -417,6 +419,8 @@ function handleEnd(e) {
   activeBlock = null;
   // Update hidden Streamlit textarea with JSON string
   const blocks = Array.from(document.querySelectorAll(".block"))
+  const grid = document.getElementById("grid");
+  const rect = grid.getBoundingClientRect();
   .filter(b => {
       if (!b.style.left || !b.style.top) return false;
       const bx = parseFloat(b.style.left) + b.offsetWidth / 2;
