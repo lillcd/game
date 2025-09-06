@@ -460,19 +460,34 @@ document.addEventListener('touchend', handleEnd);
 
 if "show_text" not in st.session_state:
     st.session_state.show_text = True
-    
-if st.button("New game"):
-    st.session_state.show_text = False
-    a_round = render_round()
-    components.html(a_round, height=660)
 
-if st.button("Submit"):
-    if data_json:
-        try:
-            payload = json.loads(data_json)
-            validate_layout(payload)
-        except Exception as e:
-            st.error(f"Invalid JSON data: {e}")          
+if "round_html" not in st.session_state:
+    st.session_state.round_html = ""
+
+# --- Layout: Buttons side by side ---
+col1, spacer, col2 = st.columns([1, 4, 1])  # Spacer pushes col2 to the right
+
+with col1:
+    if st.button("New game"):
+        st.session_state.show_text = False
+        st.session_state.round_html = render_round()  # <-- YOUR FUNCTION
+
+with col2:
+    if st.button("Submit"):
+        if data_json:
+            try:
+                payload = json.loads(data_json)
+                result = validate_layout(payload)
+                if result["success"]:
+                    st.success("✅ Correct!")
+                else:
+                    st.error("❌ Incorrect")
+            except Exception as e:
+                st.error(f"Invalid JSON data: {e}")
+
+# --- Display game (HTML blocks) ---
+if st.session_state.round_html:
+    components.html(st.session_state.round_html, height=660)
                 
 if st.session_state.show_text:
     st.title("💡 Welcome to the game!")
