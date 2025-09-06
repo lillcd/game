@@ -283,7 +283,7 @@ document.getElementById('grid').appendChild(cell);
 </div>
 
 <script>
-console.log("Received answer_checksum:", answer_checksum);
+console.log("Received answer_checksum:", answerChecksum);
 const grid = document.getElementById('grid');
 const rect = grid.getBoundingClientRect();
 const blocks = document.querySelectorAll('.block');
