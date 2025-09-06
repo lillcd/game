@@ -143,24 +143,24 @@ body { padding: 0px; margin: 0px; font-family: sans-serif; }
 .grid-container { display: grid; grid-template-columns: repeat(6, 60px); grid-template-rows: repeat(5, 60px); width: max-content; }
 .grid-cell { width: 60px; height: 60px; background-color: #eee; border: 1px solid #ccc; box-sizing: border-box; position: relative; }
 .draggable { width: 120px; height: 60px; background-color: #2E2E2E; cursor: grab; position: absolute; z-index: 10; border-radius: 7px; user-select: none; transition: transform-origin: center center; transform 0.25s ease; }
-.rotate-handle { width: 16px; height: 16px; background: none; position: absolute; cursor: pointer; z-index: 20; }
+.rotate-handle { width: 18px; height: 18px; background: none; position: absolute; cursor: pointer; z-index: 20; }
 .top-left { top: 0px; left: 0px; }
 .top-right { top: 0px; right: 0px; }
 .bottom-left { bottom: 0px; left: 0px; }
 .bottom-right { bottom: 0px; right: 0px; }
-.wrd { color: #ffffff; font-size: 14px; position: absolute; top: 50%; width: 49%; text-align: center; text-anchor: middle; line-height: 0px; }
+.wrd { color: #ffffff; font-size: 13.5px; position: absolute; top: 50%; width: 49%; text-align: center; text-anchor: middle; line-height: 0px; }
 .lwrd { left: 0; }
 .rwrd { right: 0; }
-#arena { width: 100%; height: 660px; }
-#block1 { transform: rotate(9deg); top: 325px; left: 55px; }
-#block2 { transform: rotate(-7deg); top: 315px; left: 200px; }
-#block3 { transform: rotate(-5deg); top: 400px; left: 3px; }
-#block4 { transform: rotate(-44deg); top: 415px; left: 120px; }
-#block5 { transform: rotate(2deg); top: 525px; left: 240px; }
-#block6 { transform: rotate(-1deg); top: 495px; left: 20px; }
-#block7 { transform: rotate(18deg); top: 520px; left: 220px; }
-#block8 { transform: rotate(6deg); top: 570px; left: 8px; }
-#block9 { transform: rotate(26deg); top: 570px; left: 150px; }
+#arena { width: 100%; height: 582px; }
+#block1 { transform: rotate(7deg); top: 317px; left: 5px; }
+#block2 { transform: rotate(-44deg); top: 342px; left: 114px; }
+#block3 { transform: rotate(-7deg); top: 310px; left: 235px; }
+#block4 { transform: rotate(16deg); top: 393px; left: 4px; }
+#block5 { transform: rotate(0deg); top: 377px; left: 242px; }
+#block6 { transform: rotate(-70deg); top: 487px; left: -8px; }
+#block7 { transform: rotate(24deg); top: 430px; left: 161px; }
+#block8 { transform: rotate(-9deg); top: 498px; left: 95px; }
+#block9 { transform: rotate(-36deg); top: 490px; left: 240px; }
 .dvdr { position: absolute; background-color: #ffffff; height: 52px; top: 4px; left: 58px; width: 2px; }
 .strtfnsh { position: absolute; width: 60px; height: 60px; background-color: #2E2E2E; }
 #strt { left: 0px; top: 240px; border-radius: 0px 7px 7px 0px; }
@@ -461,18 +461,27 @@ document.addEventListener('touchend', handleEnd);
 if "show_text" not in st.session_state:
     st.session_state.show_text = True
     
+if "round_html" not in st.session_state:
+    st.session_state.round_html = ""
+    
 if st.button("New game"):
     st.session_state.show_text = False
-    a_round = render_round()
-    components.html(a_round, height=660)
+    st.session_state.round_html = render_round()
+
+if st.session_state.round_html:
+    components.html(st.session_state.round_html, height=660)
 
 if st.button("Submit"):
     if data_json:
         try:
             payload = json.loads(data_json)
-            validate_layout(payload)
+            result = validate_layout(payload)
+            if result["success"]:
+                st.success("✅ Correct!")
+            else:
+                st.error("❌ Incorrect")
         except Exception as e:
-            st.error(f"Invalid JSON data: {e}")          
+            st.error(f"Invalid JSON data: {e}")         
                 
 if st.session_state.show_text:
     st.title("💡 Welcome to the game!")
