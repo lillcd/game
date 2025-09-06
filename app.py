@@ -318,7 +318,7 @@ blocks.forEach(block => {
   const handleDragStart = (e) => {
     if (e.cancelable) e.preventDefault();
     if (e.target.classList.contains('rotate-handle')) return; // 👈 Skip if rotate handle
-    console.log("drag start fired");
+    console.log("drag start fired s");
     if (isRotating) return;
     isDragging = true;
     activeBlock = block;
