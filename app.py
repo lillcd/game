@@ -77,12 +77,14 @@ rounds = {
 
 
 
+def simple_checksum(s):
+    return sum(ord(c) for c in s) % 1000000
+    
+    
+    
 def render_round():
     global current_round
     current_round = random.choice(list(rounds.keys()))
-    correct_blocks = rounds[current_round]["correct_blocks"]
-    correct_json = json.dumps(correct_blocks, separators=(',', ':'))
-    answer_hash = hashlib.sha256(correct_json.encode()).hexdigest()
     # print("🎲 Chosen round:", current_round)
     new_html = html_code
     for i, (w1, w2) in enumerate(rounds[current_round]['word_pairs'], start=1):
@@ -92,8 +94,12 @@ def render_round():
         .replace("__START_WORD__", rounds[current_round]['start_word'])
         .replace("__END_WORD__",   rounds[current_round]['end_word'])
     )
-	# Inject answer hash as a JS variable in the HTML
-    inject_script = f"<script>const solhsh = '{answer_hash}';</script>"
+    # Compute checksum of correct_blocks JSON string
+    correct_blocks = rounds[current_round]["correct_blocks"]
+    correct_json = json.dumps(correct_blocks, separators=(',', ':'))
+    answer_checksum = simple_checksum(correct_json)
+    # Inject checksum into HTML as a script tag (you can place it near the end)
+    inject_script = f'<script>const answerChecksum = {answer_checksum};</script>'
     return inject_script + new_html
 
 
@@ -277,7 +283,7 @@ document.getElementById('grid').appendChild(cell);
 </div>
 
 <script>
-console.log("Received solhsh:", solhsh);
+console.log("Received answer_checksum:", answer_checksum);
 const grid = document.getElementById('grid');
 const rect = grid.getBoundingClientRect();
 const blocks = document.querySelectorAll('.block');
