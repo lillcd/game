@@ -444,17 +444,15 @@ function handleEnd(e) {
       return { id: b.id, x: bx, y: by };
     });
 	setTimeout(() => {
-	console.log("Trying to update textarea");
-	const wrapper = window.parent.document.querySelector('div[data-testid="stTextArea"]');
-	const streamlitTextarea = wrapper ? wrapper.querySelector('textarea') : null;
-	if (streamlitTextarea) {
-    const payload = JSON.stringify(blocks);
-    console.log("Pushing to textarea:", payload);
-    streamlitTextarea.value = payload;
-    streamlitTextarea.dispatchEvent(new Event('input', { bubbles: true }));
-  	} else {
-    	console.warn("Textarea not found");
-  	}
+ 	 console.log("Sending data to Streamlit");
+ 	 const payload = JSON.stringify(blocks);
+ 	 console.log("Payload:", payload);
+
+      if (window.Streamlit && typeof window.Streamlit.setComponentValue === 'function') {
+  	  window.Streamlit.setComponentValue(payload);
+	  } else {
+ 	   console.warn("Streamlit.setComponentValue not available");
+ 	  }
 	}, 100);
 }
 document.addEventListener('mouseup', handleEnd);
