@@ -442,13 +442,19 @@ function handleEnd(e) {
       const by = parseFloat(b.style.top) - rect.top;
       return { id: b.id, x: bx, y: by };
     });
-	console.log("Updating textarea");
+	setTimeout(() => {
+	console.log("Trying to update textarea");
 	const wrapper = window.parent.document.querySelector('div[data-testid="stTextArea"]');
 	const streamlitTextarea = wrapper ? wrapper.querySelector('textarea') : null;
-	if(streamlitTextarea) {
-      streamlitTextarea.value = JSON.stringify(blocks);
-      streamlitTextarea.dispatchEvent(new Event('input', { bubbles: true }));
-    }
+	if (streamlitTextarea) {
+    const payload = JSON.stringify(blocks);
+    console.log("Pushing to textarea:", payload);
+    streamlitTextarea.value = payload;
+    streamlitTextarea.dispatchEvent(new Event('input', { bubbles: true }));
+  	} else {
+    	console.warn("Textarea not found");
+  	}
+	}, 100);
 }
 document.addEventListener('mouseup', handleEnd);
 document.addEventListener('touchend', handleEnd);
