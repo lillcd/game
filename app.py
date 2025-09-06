@@ -148,7 +148,7 @@ body { padding: 0px; margin: 0px; font-family: sans-serif; }
 .top-right { top: 0px; right: 0px; }
 .bottom-left { bottom: 0px; left: 0px; }
 .bottom-right { bottom: 0px; right: 0px; }
-.wrd { color: #ffffff; font-size: 13.5px; position: absolute; top: 50%; width: 49%; text-align: center; text-anchor: middle; line-height: 0px; }
+.wrd { color: #ffffff; font-size: 13px; position: absolute; top: 50%; width: 49%; text-align: center; text-anchor: middle; line-height: 0px; }
 .lwrd { left: 0; }
 .rwrd { right: 0; }
 #arena { width: 100%; height: 582px; }
@@ -316,6 +316,7 @@ blocks.forEach(block => {
   });
 // Dragging
   const handleDragStart = (e) => {
+    if (e.cancelable) e.preventDefault();
     console.log("drag start fired");
     if (isRotating) return;
     isDragging = true;
@@ -325,7 +326,6 @@ blocks.forEach(block => {
       const touch = e.touches[0];
       clientX = touch.clientX;
       clientY = touch.clientY;
-      if (e.cancelable) e.preventDefault();
     } else {
       clientX = e.clientX;
       clientY = e.clientY;
@@ -340,6 +340,7 @@ blocks.forEach(block => {
 
 // Mouse move: handle drag or rotation
 function handleMove(e) {
+  if (!isDragging || !activeBlock) return;
   if (!activeBlock) return;
   let clientX, clientY;
   if (e.type === 'touchmove') {
