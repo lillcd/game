@@ -487,7 +487,7 @@ with col2:
 
 # --- Display game (HTML blocks) ---
 if st.session_state.round_html:
-    components.html(st.session_state.round_html, height=660)
+    components.html(st.session_state.round_html, height=582)
                 
 if st.session_state.show_text:
     st.title("💡 Welcome to the game!")
