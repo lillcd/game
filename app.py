@@ -272,6 +272,7 @@ document.getElementById('grid').appendChild(cell);
 </div>
 
 <script>
+console.log("Same window?", window.parent === window);
 const grid = document.getElementById('grid');
 const rect = grid.getBoundingClientRect();
 const blocks = document.querySelectorAll('.block');
