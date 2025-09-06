@@ -465,7 +465,7 @@ if "round_html" not in st.session_state:
     st.session_state.round_html = ""
 
 # --- Layout: Buttons side by side ---
-col1, spacer, col2 = st.columns([1, 4, 1])  # Spacer pushes col2 to the right
+col1, col2 = st.columns(2)
 
 with col1:
     if st.button("New game"):
@@ -473,7 +473,7 @@ with col1:
         st.session_state.round_html = render_round()  # <-- YOUR FUNCTION
 
 with col2:
-    if st.button("Submit"):
+    if st.button("Validate"):
         if data_json:
             try:
                 payload = json.loads(data_json)
