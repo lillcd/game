@@ -128,7 +128,7 @@ def validate_layout(payload):
 
 # Hidden text_area to receive data from JS
 st.markdown("""
-<style>.stTextArea { display: none; } .stVerticalBlock { gap: 0.5rem !important; } div[data-testid="stLayoutWrapper"] { max-width: 360px; } .stColumn { width: calc(50% - 1rem) !important; min-width: auto !important; } .stHorizontalBlock > div.stColumn:nth-of-type(2) .stVerticalBlock .stElementContainer { margin-left: auto !important; }</style>
+<style>.stTextArea { display: none; } .stVerticalBlock { gap: 0.5rem !important; max-width: 360px !important; } div[data-testid="stLayoutWrapper"] { max-width: 360px; } .stColumn { width: calc(50% - 1rem) !important; min-width: auto !important; } .stHorizontalBlock > div.stColumn:nth-of-type(2) .stVerticalBlock .stElementContainer { margin-left: auto !important; }</style>
 """, unsafe_allow_html=True)
 
 data_json = st.text_area("Hidden Data", value="", key="hidden_data", label_visibility="collapsed", height=50)
@@ -341,7 +341,7 @@ blocks.forEach(block => {
 
 // Mouse move: handle drag or rotation
 function handleMove(e) {
-  if (!isDragging || !activeBlock) return;
+  if (!activeBlock || (!isDragging && !isRotating)) return;
   if (!activeBlock) return;
   let clientX, clientY;
   if (e.type === 'touchmove') {
