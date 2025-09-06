@@ -461,27 +461,18 @@ document.addEventListener('touchend', handleEnd);
 if "show_text" not in st.session_state:
     st.session_state.show_text = True
     
-if "round_html" not in st.session_state:
-    st.session_state.round_html = ""
-    
 if st.button("New game"):
     st.session_state.show_text = False
-    st.session_state.round_html = render_round()
-
-if st.session_state.round_html:
-    components.html(st.session_state.round_html, height=660)
+    a_round = render_round()
+    components.html(a_round, height=660)
 
 if st.button("Submit"):
     if data_json:
         try:
             payload = json.loads(data_json)
-            result = validate_layout(payload)
-            if result["success"]:
-                st.success("✅ Correct!")
-            else:
-                st.error("❌ Incorrect")
+            validate_layout(payload)
         except Exception as e:
-            st.error(f"Invalid JSON data: {e}")         
+            st.error(f"Invalid JSON data: {e}")          
                 
 if st.session_state.show_text:
     st.title("💡 Welcome to the game!")
