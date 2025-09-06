@@ -128,7 +128,7 @@ def validate_layout(payload):
 
 # Hidden text_area to receive data from JS
 st.markdown("""
-<style>.stTextArea { display: none; }</style>
+<style>.stTextArea { display: none; } .stVerticalBlock { gap: 0.5rem !important; } .stLayoutWrapper { max-width: 360px; } .stColumn { width: calc(50% - 1rem) !important; } .stColumn .stVerticalBlock .stElementContainer { margin-left: auto !important; }</style>
 """, unsafe_allow_html=True)
 
 data_json = st.text_area("Hidden Data", value="", key="hidden_data", label_visibility="collapsed", height=50)
@@ -491,4 +491,4 @@ if st.session_state.round_html:
                 
 if st.session_state.show_text:
     st.title("💡 Welcome to the game!")
-    st.write("Make your way across the board from left to right by dragging and dropping the dominoes.")
+    st.write("Make your way across the board from left to right by placing the dominoes in a line. Copyright (c) 2025 Chris Lilly")
