@@ -143,7 +143,7 @@ body { padding: 0px; margin: 0px; font-family: sans-serif; }
 .grid-container { display: grid; grid-template-columns: repeat(6, 60px); grid-template-rows: repeat(5, 60px); width: max-content; }
 .grid-cell { width: 60px; height: 60px; background-color: #eee; border: 1px solid #ccc; box-sizing: border-box; position: relative; }
 .draggable { width: 120px; height: 60px; background-color: #2E2E2E; cursor: grab; position: absolute; z-index: 10; border-radius: 7px; user-select: none; transition: transform-origin: center center; transform 0.25s ease; }
-.rotate-handle { width: 19px; height: 19px; background: none; position: absolute; cursor: pointer; z-index: 20; }
+.rotate-handle { width: 20px; height: 20px; background: none; position: absolute; cursor: pointer; z-index: 20; }
 .top-left { top: 0px; left: 0px; }
 .top-right { top: 0px; right: 0px; }
 .bottom-left { bottom: 0px; left: 0px; }
@@ -317,6 +317,7 @@ blocks.forEach(block => {
 // Dragging
   const handleDragStart = (e) => {
     if (e.cancelable) e.preventDefault();
+    if (e.target.classList.contains('rotate-handle')) return; // 👈 Skip if rotate handle
     console.log("drag start fired");
     if (isRotating) return;
     isDragging = true;
