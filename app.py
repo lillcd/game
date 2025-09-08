@@ -463,7 +463,7 @@ function handleEnd(e) {
     }
     const validPositions2 = [{ x: 180, y: 0 },{ x: 240, y: 60 },{ x: 210, y: 30 },{ x: 270, y: 90 }];
     const targetBlock2 = blocks.find(b => b.id === divd[divd.length-1]);
-    if (targetBlock2 && validPositions2.some(pos => pos.x === targetBlock.x && pos.y === targetBlock.y)) {
+    if (targetBlock2 && validPositions2.some(pos => pos.x === targetBlock2.x && pos.y === targetBlock2.y)) {
     console.log("✅ Last block is in a valid position");
     winning_end == 1;
     } else {
