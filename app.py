@@ -76,6 +76,12 @@ rounds = {
         "correct_blocks": ["block6","block2","block9","block4"],
         "start_word": "Quick",
         "end_word":   "Monkeys",
+    },
+    "r12": {
+        "word_pairs": [("Pack","Kick"),("Digger","Pump"),("Mulder","British"),("Whistle","Top"),("Deft","Leer"),("Lining","Fools"),("Cake","Party"),("Shorts","Wile E"),("Clip","Cry")],
+        "correct_blocks": ["block3","block9","block1","block8"],
+        "start_word": "Silver",
+        "end_word":   "Ugly",
     }
 }
 
@@ -104,10 +110,9 @@ def render_round():
     )
     # Compute checksum of correct_blocks JSON string
     correct_blocks = rounds[current_round]["correct_blocks"]
-    correct_json = json.dumps(correct_blocks, separators=(',', ':'))
-    answer_check = simple_check(correct_json)
+    answer_check = simple_check(correct_blocks)
     # Inject checksum into HTML as a script tag (you can place it near the end)
-    inject_script = f'<script>const blockref = {answer_check};</script>'
+    inject_script = f'<script>const blockref = {json.dumps(answer_check)};</script>'
     return inject_script + new_html
 
 
