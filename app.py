@@ -70,6 +70,12 @@ rounds = {
         "correct_blocks": ["block2","block6","block9","block3"],
         "start_word": "Ski",
         "end_word":   "Job",
+    },
+    "r11": {
+        "word_pairs": [("Wind","Keys"),("Digger","Pump"),("Percy","Vehicle"),("Whistle","Top"),("Deft","Leer"),("Lining","Fools"),("Cake","Party"),("Pass","Ropes"),("Maiden","Biscuit")],
+        "correct_blocks": ["block6","block2","block9","block4"],
+        "start_word": "Quick",
+        "end_word":   "Monkeys",
     }
 }
 
@@ -77,8 +83,10 @@ rounds = {
 
 
 
-def simple_checksum(s):
-    return sum(ord(c) for c in s) % 1000000
+def simple_check(block_ids):
+    nums = [int(b.replace("block", "")) for b in block_ids]  # e.g., [7, 2, 8, 6]
+    encoded = [n * 31 for n in nums]  # e.g., [217, 62, 248, 186]
+    return encoded
     
     
     
@@ -97,9 +105,9 @@ def render_round():
     # Compute checksum of correct_blocks JSON string
     correct_blocks = rounds[current_round]["correct_blocks"]
     correct_json = json.dumps(correct_blocks, separators=(',', ':'))
-    answer_checksum = simple_checksum(correct_json)
+    answer_check = simple_check(correct_json)
     # Inject checksum into HTML as a script tag (you can place it near the end)
-    inject_script = f'<script>const answerChecksum = {answer_checksum};</script>'
+    inject_script = f'<script>const blockref = {answer_check};</script>'
     return inject_script + new_html
 
 
@@ -283,7 +291,7 @@ document.getElementById('grid').appendChild(cell);
 </div>
 
 <script>
-console.log("Received answer_checksum:", answerChecksum);
+console.log("Received answer check:", blockref);
 const grid = document.getElementById('grid');
 const rect = grid.getBoundingClientRect();
 const blocks = document.querySelectorAll('.block');
@@ -454,6 +462,8 @@ function handleEnd(e) {
       const by = parseFloat(b.style.top) - rect.top;
       return { id: b.id, x: bx, y: by };
     });
+    console.log("blockref: blockref:", blockref)
+    console.log("blockref: blocks:", blocks)
 	setTimeout(() => {
  	 console.log("Sending data to Streamlit");
  	 const payload = JSON.stringify(blocks);
