@@ -82,6 +82,12 @@ rounds = {
         "correct_blocks": ["block3","block9","block1","block8"],
         "start_word": "Silver",
         "end_word":   "Ugly",
+    },
+    "r13": {
+        "word_pairs": [("Juice","Dragon"),("Robot","Tech"),("Bat","Gypsy"),("Orchestra","Hallow"),("Metal","Pork"),("Habit","Weapon"),("Ball","Dung"),("Line","Jiminy"),("Graph","Mower")],
+        "correct_blocks": ["block8","block3","block7","block8"],
+        "start_word": "Queen",
+        "end_word":   "Fish",
     }
 }
 
@@ -300,6 +306,7 @@ console.log("Received answer check:", blockref);
 let winning_blocks = 0;
 let winning_start = 0;
 let winning_end = 0;
+const arena = document.getElementById("arena");
 const grid = document.getElementById('grid');
 const rect = grid.getBoundingClientRect();
 const blocks = document.querySelectorAll('.block');
@@ -480,12 +487,7 @@ function handleEnd(e) {
     } else {
     console.log("❌ Missing or incorrect blocks");
     }
-    const validPositions1 = [
-    { x: 0, y: 180 },
-    { x: 60, y: 240 },
-    { x: -30, y: 150 },
-    { x: 30, y: 210 }
-    ];
+    const validPositions1 = [{ x: 0, y: 180 },{ x: 60, y: 240 },{ x: -30, y: 150 },{ x: 30, y: 210 }];
     const targetBlock = blocks.find(b => b.id === divd[0]);
     if (targetBlock && validPositions1.some(pos => pos.x === targetBlock.x && pos.y === targetBlock.y)) {
     console.log("✅ First block is in a valid position");
@@ -493,12 +495,20 @@ function handleEnd(e) {
     } else {
     console.log("❌ First block is NOT in a valid position");
     }
+    const validPositions2 = [{ x: 180, y: 0 },{ x: 240, y: 60 },{ x: 210, y: 30 },{ x: 270, y: 90 }];
+    const targetBlock2 = blocks.find(b => b.id === divd[divd.length-1]);
+    if (targetBlock2 && validPositions2.some(pos => pos.x === targetBlock.x && pos.y === targetBlock.y)) {
+    console.log("✅ Last block is in a valid position");
+    winning_end == 1;
+    } else {
+    console.log("❌ Last block is NOT in a valid position");
+    }
 }
 document.addEventListener('mouseup', handleEnd);
 document.addEventListener('touchend', handleEnd);
 
-if (winning_blocks == 1 && winning_start == 1) {
-arena.innerHTML = "<h2>🎉 You win!</h2>";
+if (winning_blocks == 1 && winning_start == 1 && winning_end == 1) {
+arena.innerHTML = "<h2>🎉 You win!</h2><p>Have another go if you think you're so great.</p>";
 }
 
 </script>
