@@ -445,6 +445,15 @@ function handleEnd(e) {
     });
     console.log("blockref:", blockref);
     console.log("blocks:", blocks);
+    const roundTo60 = (n) => Math.round(n / 60) * 60;
+    const sortedBlocks = blocks.sort((a, b) => {
+    const ay = roundTo60(a.y);
+    const by = roundTo60(b.y);
+    const ax = roundTo60(a.x);
+    const bx = roundTo60(b.x);
+    return ay - by || ax - bx;
+    });
+    console.log("sortedblocks:", sortedBlocks);
     const divd = blockref.map(n => `block${n / 31}`);
     const usedIds = blocks.map(b => b.id);
     if (divd.every(id => usedIds.includes(id))) {
