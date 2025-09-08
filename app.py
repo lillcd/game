@@ -124,44 +124,10 @@ def render_round():
 
 
 
-
-def validate_layout(payload):
-    console.log("validation started");
-    blocks = payload.get("blocks", [])
-    block_ids = {b["id"] for b in blocks}
-    required = rounds[current_round]['correct_blocks']
-    # ✅ check correct set of blocks
-    if set(block_ids) != set(required):
-      st.write("❌ Incorrect")
-      # print(required)
-      # print(block_ids)
-      missing = required - block_ids
-      extras = block_ids - required
-      # if missing: print("Missing:", ", ".join(sorted(missing)))
-      # if extras:  print("Extra:",   ", ".join(sorted(extras)))
-      return {"success": False}
-    # valid positions
-    valid_positions_1 = {(0, 180), (60, 240), (-30, 150), (30, 210)}
-    valid_positions_2 = {(180, 0), (240, 60), (210, 30), (270, 90)}
-    coords = {b["id"]: (b["x"], b["y"]) for b in blocks}
-    key1 = coords.get(rounds[current_round]['correct_blocks'][0])
-    key2 = coords.get(rounds[current_round]['correct_blocks'][-1])
-    if key1 in valid_positions_1 and key2 in valid_positions_2:
-        st.write("✅ Correct!")
-        return {"success": True}
-    else:
-        st.write("❌ Incorrect")
-        # print(key1)
-        return {"success": False}
-
-
-
 # Hidden text_area to receive data from JS
 st.markdown("""
-<style>.stTextArea { display: none; } .stVerticalBlock { gap: 0.5rem !important; max-width: 360px !important; } div[data-testid="stLayoutWrapper"] { max-width: 360px; } .stColumn { width: calc(50% - 1rem) !important; min-width: auto !important; } .stHorizontalBlock > div.stColumn:nth-of-type(2) .stVerticalBlock .stElementContainer { margin-left: auto !important; }</style>
+<style>.stTextArea { display: none; } .stVerticalBlock { gap: 0.5rem !important; max-width: 360px !important; } div[data-testid="stLayoutWrapper"] { max-width: 360px; } .stMainBlockContainer { padding-bottom: 50px !important; }</style>
 """, unsafe_allow_html=True)
-
-data_json = st.text_area("Hidden Data", value="", key="hidden_data", label_visibility="collapsed", height=50)
 
          
             
@@ -524,26 +490,9 @@ if "show_text" not in st.session_state:
 if "round_html" not in st.session_state:
     st.session_state.round_html = ""
 
-# --- Layout: Buttons side by side ---
-col1, col2 = st.columns(2)
-
-with col1:
-    if st.button("New game"):
+if st.button("New game"):
         st.session_state.show_text = False
         st.session_state.round_html = render_round()  # <-- YOUR FUNCTION
-
-with col2:
-    if st.button("Validate"):
-        if data_json:
-            try:
-                payload = json.loads(data_json)
-                result = validate_layout(payload)
-                if result["success"]:
-                    st.success("✅ Correct!")
-                else:
-                    st.error("❌ Incorrect")
-            except Exception as e:
-                st.error(f"Invalid JSON data: {e}")
 
 # --- Display game (HTML blocks) ---
 if st.session_state.round_html:
