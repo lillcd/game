@@ -297,6 +297,9 @@ document.getElementById('grid').appendChild(cell);
 
 <script>
 console.log("Received answer check:", blockref);
+let winning_blocks = 0;
+let winning_start = 0;
+let winning_end = 0;
 const grid = document.getElementById('grid');
 const rect = grid.getBoundingClientRect();
 const blocks = document.querySelectorAll('.block');
@@ -467,22 +470,36 @@ function handleEnd(e) {
       const by = parseFloat(b.style.top) - rect.top;
       return { id: b.id, x: bx, y: by };
     });
-    console.log("blockref: blockref:", blockref)
-    console.log("blockref: blocks:", blocks)
-	setTimeout(() => {
- 	 console.log("Sending data to Streamlit");
- 	 const payload = JSON.stringify(blocks);
- 	 console.log("Payload:", payload);
-
-      if (window.Streamlit && typeof window.Streamlit.setComponentValue === 'function') {
-  	  window.Streamlit.setComponentValue(payload);
-	  } else {
- 	   console.warn("Streamlit.setComponentValue not available");
- 	  }
-	}, 100);
+    console.log("blockref:", blockref);
+    console.log("blocks:", blocks);
+    const divd = blockref.map(n => `block${n / 31}`);
+    const usedIds = blocks.map(b => b.id);
+    if (divd.every(id => usedIds.includes(id))) {
+    console.log("✅ Correct blocks used");
+    winning_blocks == 1;
+    } else {
+    console.log("❌ Missing or incorrect blocks");
+    }
+    const validPositions1 = [
+    { x: 0, y: 180 },
+    { x: 60, y: 240 },
+    { x: -30, y: 150 },
+    { x: 30, y: 210 }
+    ];
+    const targetBlock = blocks.find(b => b.id === divd[0]);
+    if (targetBlock && validPositions1.some(pos => pos.x === targetBlock.x && pos.y === targetBlock.y)) {
+    console.log("✅ First block is in a valid position");
+    winning_start == 1;
+    } else {
+    console.log("❌ First block is NOT in a valid position");
+    }
 }
 document.addEventListener('mouseup', handleEnd);
 document.addEventListener('touchend', handleEnd);
+
+if (winning_blocks == 1 && winning_start == 1) {
+arena.innerHTML = "<h2>🎉 You win!</h2>";
+}
 
 </script>
 
