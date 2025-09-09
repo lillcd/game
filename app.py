@@ -478,13 +478,14 @@ function handleEnd(e) {
     } else {
     console.log("❌ Last block is NOT in a valid position");
     }
+    if (winning_blocks == 1 && winning_start == 1 && winning_end == 1) {
+    arena.innerHTML = "<h2>🎉 You win!</h2><p>Have another go if you think you're so great.</p>";
+    }
 }
 document.addEventListener('mouseup', handleEnd);
 document.addEventListener('touchend', handleEnd);
 
-if (winning_blocks == 1 && winning_start == 1 && winning_end == 1) {
-arena.innerHTML = "<h2>🎉 You win!</h2><p>Have another go if you think you're so great.</p>";
-}
+
 
 </script>
 
