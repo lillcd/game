@@ -461,13 +461,13 @@ function handleEnd(e) {
 	const id = `block${num}`;
 	const match = blocks.find(b => b.id === id);
 	return match ? { x: Math.round(match.x), y: Math.round(match.y) } : null;
+	});
 	console.log("testCoords (which is blocks but in the oder of the sol Py provided):", testCoords);
 	const isValidPosition = validPositions.some(validSet =>
 	validSet.every((pos, i) =>
 	pos.x === testCoords[i].x && pos.y === testCoords[i].y
 	)
 	);
-	});
     } else {
     console.log("❌ Missing or incorrect blocks");
     }
