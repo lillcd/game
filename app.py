@@ -138,7 +138,7 @@ def render_round():
 
 # Hidden text_area to receive data from JS
 st.markdown("""
-<style>.stTextArea { display: none; } .stVerticalBlock { gap: 0.5rem !important; max-width: 360px !important; } div[data-testid="stLayoutWrapper"] { max-width: 360px; } .stMainBlockContainer { min-height: 100vh; position: relative; overflow: hidden !important; padding-top: 55px !important; padding-right: 12px !important; padding-bottom: 45px !important; padding-left: 12px !important; } .stElementContainer:nth-of-type(2) { position: absolute; left: 12px; bottom: 12px; }</style>
+<style>.stTextArea { display: none; } .stVerticalBlock { gap: 0.5rem !important; max-width: 360px !important; } div[data-testid="stLayoutWrapper"] { max-width: 360px; } .stMainBlockContainer { min-height: 100vh; position: relative; overflow: hidden !important; padding-top: 55px !important; padding-right: 12px !important; padding-bottom: 45px !important; padding-left: 12px !important; } .stElementContainer:nth-of-type(2) { position: absolute; left: 12px; top: 12px; z-index: 999999; }</style>
 """, unsafe_allow_html=True)
 
          
@@ -510,5 +510,5 @@ if st.session_state.round_html:
     components.html(st.session_state.round_html, height=582)
                 
 if st.session_state.show_text:
-    st.title("💡 Welcome to the game!")
-    st.write("Make your way across the board from left to right by placing the dominoes in a line, using hidden related links. In this example, the links are 'ORANGE' (Seville orange, Orange County) and 'Red' (Simply Red, Red herring). Copyright (c) 2025 Chris Lilly")
+    st.title("💡 Welcome to [game name tbc]!")
+    st.write("Make your way across the board from left to right by placing the dominoes in a line, connecting the dominoes using hidden related links. For example, the hidden links could be 'ORANGE' (Seville orange, Orange County) and 'Red' (Simply Red, Red herring). Copyright (c) 2025 Chris Lilly")
