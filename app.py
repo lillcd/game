@@ -510,5 +510,5 @@ if st.session_state.round_html:
     components.html(st.session_state.round_html, height=582)
                 
 if st.session_state.show_text:
-    st.title("💡 Welcome to [game name tbc]!")
-    st.write("Make your way across the board from left to right by placing the dominoes in a line, connecting the dominoes using hidden related links. For example, the hidden links could be 'ORANGE' (Seville orange, Orange County) and 'Red' (Simply Red, Red herring). Copyright (c) 2025 Chris Lilly")
+    st.title("💡 Welcome to KeyWordPlay!")
+    st.write("Make your way across the board from left to right by placing the blocks in a line, connecting them like dominoes using hidden related links. For example, 'Key' could be placed next to 'Play' using the hidden link 'Word' (Key word, Word play). Copyright (c) 2025 Chris Lilly")
