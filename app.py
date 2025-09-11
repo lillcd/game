@@ -456,9 +456,8 @@ function handleEnd(e) {
     const usedIds = blocks.map(b => b.id);
     if (divd.every(id => usedIds.includes(id))) {
     console.log("✅ Correct blocks used");
-    winning_blocks == 1;
+    winning_blocks = 1;
     const testCoords = divd.map(num => {
-	const id = `block${num}`;
 	const match = blocks.find(b => b.id === id);
 	return match ? { x: Math.round(match.x), y: Math.round(match.y) } : null;
 	});
