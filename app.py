@@ -457,8 +457,8 @@ function handleEnd(e) {
     if (divd.every(id => usedIds.includes(id))) {
     console.log("✅ Correct blocks used");
     winning_blocks = 1;
-    const testCoords = divd.map(num => {
-	const match = blocks.find(b => b.id === id);
+    const testCoords = divd.map(blockId => {
+	const match = blocks.find(b => b.id === blockId);
 	return match ? { x: Math.round(match.x), y: Math.round(match.y) } : null;
 	});
 	console.log("testCoords (which is blocks but in the oder of the sol Py provided):", testCoords);
