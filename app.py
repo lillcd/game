@@ -48,7 +48,7 @@ rounds = {
         "end_word":   "Head",
     },
     "r7": {
-        "word_pairs": [("Sonic","Leg"),("Pass","Hell's"),("For","Fifty"),("Doctor","French"),("MBE","Port"),("Abroad","Guest"),("Lizard","Albert"),("Counter","Under"),("Greek","Double")],
+        "word_pairs": [("Sonic","Leg"),("Mark","Hell's"),("For","Fifty"),("Doctor","French"),("MBE","Port"),("Abroad","Guest"),("Lizard","Albert"),("Counter","Under"),("Greek","Double")],
         "correct_blocks": ["block7","block2","block8","block6"],
         "start_word": "Airport",
         "end_word":   "Eyes",
@@ -88,6 +88,12 @@ rounds = {
         "correct_blocks": ["block8","block3","block7","block8"],
         "start_word": "Queen",
         "end_word":   "Fish",
+    },
+    "r14": {
+        "word_pairs": [("Martin","Loaf"),("Whites","Arm"),("Day","Lawn"),("Pablo","Mull"),("Bell","Jiminy"),("Habitat","Fool"),("Bicuit","Member"),("With","Shadow"),("Tyre","Floor")],
+        "correct_blocks": ["block5","block2","block8","block3"],
+        "start_word": "Stage",
+        "end_word":   "Elbow",
     }
 }
 
@@ -424,6 +430,7 @@ function handleEnd(e) {
   }
   activeBlock = null;
   // Update hidden Streamlit textarea with JSON string
+  const validPositions = [[{ x: 0, y: 180 },{ x: 60, y: 120 },{ x: 120, y: 60 },{ x: 180, y: 0 }],[{ x: 0, y: 180 },{ x: 60, y: 120 },{ x: 120, y: 60 },{ x: 240, y: 60 }],[{ x: 0, y: 180 },{ x: 60, y: 120 },{ x: 120, y: 60 },{ x: 210, y: 30 }],[{ x: 0, y: 180 },{ x: 60, y: 120 },{ x: 180, y: 120 },{ x: 240, y: 60 }],[{ x: 0, y: 180 },{ x: 60, y: 120 },{ x: 180, y: 120 },{ x: 210, y: 30 }],[{ x: 0, y: 180 },{ x: 60, y: 120 },{ x: 180, y: 120 },{ x: 270, y: 90 }],[{ x: 0, y: 180 },{ x: 60, y: 120 },{ x: 90, y: 30 },{ x: 180, y: 0 }],[{ x: 0, y: 180 },{ x: 60, y: 120 },{ x: 150, y: 90 },{ x: 180, y: 0 }],[{ x: 0, y: 180 },{ x: 60, y: 120 },{ x: 150, y: 90 },{ x: 240, y: 60 }],[{ x: 0, y: 180 },{ x: 60, y: 120 },{ x: 150, y: 90 },{ x: 150, y: 90 }],[{ x: 0, y: 180 },{ x: 120, y: 180 },{ x: 180, y: 120 },{ x: 240, y: 60 }],[{ x: 0, y: 180 },{ x: 120, y: 180 },{ x: 180, y: 120 },{ x: 210, y: 30 }],[{ x: 0, y: 180 },{ x: 120, y: 180 },{ x: 180, y: 120 },{ x: 270, y: 90 }],[{ x: 0, y: 180 },{ x: 120, y: 180 },{ x: 240, y: 180 },{ x: 270, y: 90 }],[{ x: 0, y: 180 },{ x: 120, y: 180 },{ x: 150, y: 90 },{ x: 180, y: 0 }],[{ x: 0, y: 180 },{ x: 120, y: 180 },{ x: 150, y: 90 },{ x: 240, y: 60 }],[{ x: 0, y: 180 },{ x: 120, y: 180 },{ x: 150, y: 90 },{ x: 210, y: 30 }],[{ x: 0, y: 180 },{ x: 120, y: 180 },{ x: 210, y: 150 },{ x: 240, y: 60 }],[{ x: 0, y: 180 },{ x: 120, y: 180 },{ x: 210, y: 150 },{ x: 210, y: 30 }],[{ x: 0, y: 180 },{ x: 120, y: 180 },{ x: 210, y: 150 },{ x: 270, y: 90 }],[{ x: 0, y: 180 },{ x: 30, y: 90 },{ x: 60, y: 0 },{ x: 180, y: 0 }],[{ x: 0, y: 180 },{ x: 30, y: 90 },{ x: 120, y: 60 },{ x: 180, y: 0 }],[{ x: 0, y: 180 },{ x: 30, y: 90 },{ x: 120, y: 60 },{ x: 240, y: 60 }],[{ x: 0, y: 180 },{ x: 30, y: 90 },{ x: 120, y: 60 },{ x: 210, y: 30 }],[{ x: 0, y: 180 },{ x: 30, y: 90 },{ x: 90, y: 30 },{ x: 180, y: 0 }],[{ x: 0, y: 180 },{ x: 90, y: 150 },{ x: 120, y: 60 },{ x: 180, y: 0 }],[{ x: 0, y: 180 },{ x: 90, y: 150 },{ x: 120, y: 60 },{ x: 240, y: 60 }],[{ x: 0, y: 180 },{ x: 90, y: 150 },{ x: 120, y: 60 },{ x: 90, y: 150 }],[{ x: 0, y: 180 },{ x: 90, y: 150 },{ x: 180, y: 120 },{ x: 240, y: 60 }],[{ x: 0, y: 180 },{ x: 90, y: 150 },{ x: 180, y: 120 },{ x: 210, y: 30 }],[{ x: 0, y: 180 },{ x: 90, y: 150 },{ x: 180, y: 120 },{ x: 270, y: 90 }],[{ x: 0, y: 180 },{ x: 90, y: 150 },{ x: 90, y: 30 },{ x: 180, y: 0 }],[{ x: 0, y: 180 },{ x: 90, y: 150 },{ x: 150, y: 90 },{ x: 180, y: 0 }],[{ x: 0, y: 180 },{ x: 90, y: 150 },{ x: 150, y: 90 },{ x: 240, y: 60 }],[{ x: 0, y: 180 },{ x: 90, y: 150 },{ x: 150, y: 90 },{ x: 210, y: 30 }],[{ x: 60, y: 240 },{ x: 120, y: 180 },{ x: 180, y: 120 },{ x: 240, y: 60 }],[{ x: 60, y: 240 },{ x: 120, y: 180 },{ x: 180, y: 120 },{ x: 210, y: 30 }],[{ x: 60, y: 240 },{ x: 120, y: 180 },{ x: 180, y: 120 },{ x: 270, y: 90 }],[{ x: 60, y: 240 },{ x: 120, y: 180 },{ x: 240, y: 180 },{ x: 270, y: 90 }],[{ x: 60, y: 240 },{ x: 120, y: 180 },{ x: 150, y: 90 },{ x: 180, y: 0 }],[{ x: 60, y: 240 },{ x: 120, y: 180 },{ x: 150, y: 90 },{ x: 240, y: 60 }],[{ x: 60, y: 240 },{ x: 120, y: 180 },{ x: 150, y: 90 },{ x: 210, y: 30 }],[{ x: 60, y: 240 },{ x: 120, y: 180 },{ x: 210, y: 150 },{ x: 240, y: 60 }],[{ x: 60, y: 240 },{ x: 120, y: 180 },{ x: 210, y: 150 },{ x: 210, y: 30 }],[{ x: 60, y: 240 },{ x: 120, y: 180 },{ x: 210, y: 150 },{ x: 270, y: 90 }],[{ x: 60, y: 240 },{ x: 180, y: 240 },{ x: 240, y: 180 },{ x: 270, y: 90 }],[{ x: 60, y: 240 },{ x: 180, y: 240 },{ x: 210, y: 150 },{ x: 240, y: 60 }],[{ x: 60, y: 240 },{ x: 180, y: 240 },{ x: 210, y: 150 },{ x: 210, y: 30 }],[{ x: 60, y: 240 },{ x: 180, y: 240 },{ x: 210, y: 150 },{ x: 270, y: 90 }],[{ x: 60, y: 240 },{ x: 180, y: 240 },{ x: 270, y: 210 },{ x: 270, y: 90 }],[{ x: 60, y: 240 },{ x: 90, y: 150 },{ x: 120, y: 60 },{ x: 180, y: 0 }],[{ x: 60, y: 240 },{ x: 90, y: 150 },{ x: 120, y: 60 },{ x: 240, y: 60 }],[{ x: 60, y: 240 },{ x: 90, y: 150 },{ x: 120, y: 60 },{ x: 210, y: 30 }],[{ x: 60, y: 240 },{ x: 90, y: 150 },{ x: 180, y: 120 },{ x: 240, y: 60 }],[{ x: 60, y: 240 },{ x: 90, y: 150 },{ x: 180, y: 120 },{ x: 210, y: 30 }],[{ x: 60, y: 240 },{ x: 90, y: 150 },{ x: 180, y: 120 },{ x: 270, y: 90 }],[{ x: 60, y: 240 },{ x: 90, y: 150 },{ x: 90, y: 30 },{ x: 180, y: 0 }],[{ x: 60, y: 240 },{ x: 90, y: 150 },{ x: 150, y: 90 },{ x: 180, y: 0 }],[{ x: 60, y: 240 },{ x: 90, y: 150 },{ x: 150, y: 90 },{ x: 240, y: 60 }],[{ x: 60, y: 240 },{ x: 90, y: 150 },{ x: 150, y: 90 },{ x: 210, y: 30 }],[{ x: 60, y: 240 },{ x: 150, y: 210 },{ x: 180, y: 120 },{ x: 240, y: 60 }],[{ x: 60, y: 240 },{ x: 150, y: 210 },{ x: 180, y: 120 },{ x: 210, y: 30 }],[{ x: 60, y: 240 },{ x: 150, y: 210 },{ x: 180, y: 120 },{ x: 270, y: 90 }],[{ x: 60, y: 240 },{ x: 150, y: 210 },{ x: 240, y: 180 },{ x: 270, y: 90 }],[{ x: 60, y: 240 },{ x: 150, y: 210 },{ x: 150, y: 90 },{ x: 180, y: 0 }],[{ x: 60, y: 240 },{ x: 150, y: 210 },{ x: 150, y: 90 },{ x: 240, y: 60 }],[{ x: 60, y: 240 },{ x: 150, y: 210 },{ x: 150, y: 90 },{ x: 210, y: 30 }],[{ x: 60, y: 240 },{ x: 150, y: 210 },{ x: 210, y: 150 },{ x: 240, y: 60 }],[{ x: 60, y: 240 },{ x: 150, y: 210 },{ x: 210, y: 150 },{ x: 210, y: 30 }],[{ x: 60, y: 240 },{ x: 150, y: 210 },{ x: 210, y: 150 },{ x: 270, y: 90 }],[{ x: -30, y: 150 },{ x: 0, y: 60 },{ x: 60, y: 0 },{ x: 180, y: 0 }],[{ x: -30, y: 150 },{ x: 0, y: 60 },{ x: 120, y: 60 },{ x: 180, y: 0 }],[{ x: -30, y: 150 },{ x: 0, y: 60 },{ x: 120, y: 60 },{ x: 240, y: 60 }],[{ x: -30, y: 150 },{ x: 0, y: 60 },{ x: 120, y: 60 },{ x: 210, y: 30 }],[{ x: -30, y: 150 },{ x: 0, y: 60 },{ x: 90, y: 30 },{ x: 180, y: 0 }],[{ x: -30, y: 150 },{ x: 60, y: 120 },{ x: 120, y: 60 },{ x: 180, y: 0 }],[{ x: -30, y: 150 },{ x: 60, y: 120 },{ x: 120, y: 60 },{ x: 240, y: 60 }],[{ x: -30, y: 150 },{ x: 60, y: 120 },{ x: 120, y: 60 },{ x: 210, y: 30 }],[{ x: -30, y: 150 },{ x: 60, y: 120 },{ x: 180, y: 120 },{ x: 240, y: 60 }],[{ x: -30, y: 150 },{ x: 60, y: 120 },{ x: 180, y: 120 },{ x: 210, y: 30 }],[{ x: -30, y: 150 },{ x: 60, y: 120 },{ x: 180, y: 120 },{ x: 270, y: 90 }],[{ x: -30, y: 150 },{ x: 60, y: 120 },{ x: 90, y: 30 },{ x: 180, y: 0 }],[{ x: -30, y: 150 },{ x: 60, y: 120 },{ x: 150, y: 90 },{ x: 180, y: 0 }],[{ x: -30, y: 150 },{ x: 60, y: 120 },{ x: 150, y: 90 },{ x: 240, y: 60 }],[{ x: -30, y: 150 },{ x: 60, y: 120 },{ x: 150, y: 90 },{ x: 210, y: 30 }],[{ x: -30, y: 150 },{ x: -30, y: 30 },{ x: 60, y: 0 },{ x: 180, y: 0 }],[{ x: -30, y: 150 },{ x: 30, y: 90 },{ x: 60, y: 0 },{ x: 180, y: 0 }],[{ x: -30, y: 150 },{ x: 30, y: 90 },{ x: 120, y: 60 },{ x: 180, y: 0 }],[{ x: -30, y: 150 },{ x: 30, y: 90 },{ x: 120, y: 60 },{ x: 240, y: 60 }],[{ x: -30, y: 150 },{ x: 30, y: 90 },{ x: 120, y: 60 },{ x: 210, y: 30 }],[{ x: -30, y: 150 },{ x: 30, y: 90 },{ x: 90, y: 30 },{ x: 180, y: 0 }],[{ x: 30, y: 210 },{ x: 60, y: 120 },{ x: 120, y: 60 },{ x: 180, y: 0 }],[{ x: 30, y: 210 },{ x: 60, y: 120 },{ x: 120, y: 60 },{ x: 240, y: 60 }],[{ x: 30, y: 210 },{ x: 60, y: 120 },{ x: 120, y: 60 },{ x: 210, y: 30 }],[{ x: 30, y: 210 },{ x: 60, y: 120 },{ x: 180, y: 120 },{ x: 240, y: 60 }],[{ x: 30, y: 210 },{ x: 60, y: 120 },{ x: 180, y: 120 },{ x: 210, y: 30 }],[{ x: 30, y: 210 },{ x: 60, y: 120 },{ x: 180, y: 120 },{ x: 270, y: 90 }],[{ x: 30, y: 210 },{ x: 60, y: 120 },{ x: 90, y: 30 },{ x: 180, y: 0 }],[{ x: 30, y: 210 },{ x: 60, y: 120 },{ x: 90, y: 30 },{ x: 180, y: 0 }],[{ x: 30, y: 210 },{ x: 60, y: 120 },{ x: 150, y: 90 },{ x: 180, y: 0 }],[{ x: 30, y: 210 },{ x: 60, y: 120 },{ x: 150, y: 90 },{ x: 240, y: 60 }],[{ x: 30, y: 210 },{ x: 60, y: 120 },{ x: 150, y: 90 },{ x: 210, y: 30 }],[{ x: 30, y: 210 },{ x: 120, y: 180 },{ x: 180, y: 120 },{ x: 240, y: 60 }],[{ x: 30, y: 210 },{ x: 120, y: 180 },{ x: 180, y: 120 },{ x: 210, y: 30 }],[{ x: 30, y: 210 },{ x: 120, y: 180 },{ x: 180, y: 120 },{ x: 270, y: 90 }],[{ x: 30, y: 210 },{ x: 120, y: 180 },{ x: 240, y: 180 },{ x: 270, y: 90 }],[{ x: 30, y: 210 },{ x: 120, y: 180 },{ x: 240, y: 180 },{ x: 270, y: 90 }],[{ x: 30, y: 210 },{ x: 120, y: 180 },{ x: 240, y: 180 },{ x: 270, y: 90 }],[{ x: 30, y: 210 },{ x: 120, y: 180 },{ x: 150, y: 90 },{ x: 180, y: 0 }],[{ x: 30, y: 210 },{ x: 120, y: 180 },{ x: 150, y: 90 },{ x: 240, y: 60 }],[{ x: 30, y: 210 },{ x: 120, y: 180 },{ x: 150, y: 90 },{ x: 210, y: 30 }],[{ x: 30, y: 210 },{ x: 120, y: 180 },{ x: 210, y: 150 },{ x: 240, y: 60 }],[{ x: 30, y: 210 },{ x: 120, y: 180 },{ x: 210, y: 150 },{ x: 210, y: 30 }],[{ x: 30, y: 210 },{ x: 120, y: 180 },{ x: 210, y: 150 },{ x: 270, y: 90 }],[{ x: 30, y: 210 },{ x: 30, y: 90 },{ x: 60, y: 0 },{ x: 180, y: 0 }],[{ x: 30, y: 210 },{ x: 30, y: 90 },{ x: 120, y: 60 },{ x: 180, y: 0 }],[{ x: 30, y: 210 },{ x: 30, y: 90 },{ x: 120, y: 60 },{ x: 240, y: 60 }],[{ x: 30, y: 210 },{ x: 30, y: 90 },{ x: 120, y: 60 },{ x: 210, y: 30 }],[{ x: 30, y: 210 },{ x: 30, y: 90 },{ x: 90, y: 30 },{ x: 180, y: 0 }],[{ x: 30, y: 210 },{ x: 90, y: 150 },{ x: 120, y: 60 },{ x: 180, y: 0 }],[{ x: 30, y: 210 },{ x: 90, y: 150 },{ x: 120, y: 60 },{ x: 240, y: 60 }],[{ x: 30, y: 210 },{ x: 90, y: 150 },{ x: 120, y: 60 },{ x: 210, y: 30 }],[{ x: 30, y: 210 },{ x: 90, y: 150 },{ x: 180, y: 120 },{ x: 240, y: 60 }],[{ x: 30, y: 210 },{ x: 90, y: 150 },{ x: 180, y: 120 },{ x: 210, y: 30 }],[{ x: 30, y: 210 },{ x: 90, y: 150 },{ x: 180, y: 120 },{ x: 270, y: 90 }],[{ x: 30, y: 210 },{ x: 90, y: 150 },{ x: 90, y: 30 },{ x: 180, y: 0 }],[{ x: 30, y: 210 },{ x: 90, y: 150 },{ x: 150, y: 90 },{ x: 180, y: 0 }],[{ x: 30, y: 210 },{ x: 90, y: 150 },{ x: 150, y: 90 },{ x: 240, y: 60 }],[{ x: 30, y: 210 },{ x: 90, y: 150 },{ x: 150, y: 90 },{ x: 210, y: 30 }]];
   const grid = document.getElementById("grid");
   const rect = grid.getBoundingClientRect();
   const blocks = Array.from(document.querySelectorAll(".block"))
@@ -445,40 +452,26 @@ function handleEnd(e) {
     });
     console.log("blockref:", blockref);
     console.log("blocks:", blocks);
-    const roundTo60 = (n) => Math.round(n / 60) * 60;
-    const sortedBlocks = blocks.sort((a, b) => {
-    const ay = roundTo60(a.y);
-    const by = roundTo60(b.y);
-    const ax = roundTo60(a.x);
-    const bx = roundTo60(b.x);
-    return ay - by || ax - bx;
-    });
-    console.log("sortedblocks:", sortedBlocks);
     const divd = blockref.map(n => `block${n / 31}`);
     const usedIds = blocks.map(b => b.id);
     if (divd.every(id => usedIds.includes(id))) {
     console.log("✅ Correct blocks used");
     winning_blocks == 1;
+    const testCoords = divd.map(num => {
+	const id = `block${num}`;
+	const match = blocks.find(b => b.id === id);
+	return match ? { x: Math.round(match.x), y: Math.round(match.y) } : null;
+	console.log("testCoords (which is blocks but in the oder of the sol Py provided):", testCoords);
+	const isValidPosition = validPositions.some(validSet =>
+	validSet.every((pos, i) =>
+	pos.x === testCoords[i].x && pos.y === testCoords[i].y
+	)
+	);
+	});
     } else {
     console.log("❌ Missing or incorrect blocks");
     }
-    const validPositions1 = [{ x: 0, y: 180 },{ x: 60, y: 240 },{ x: -30, y: 150 },{ x: 30, y: 210 }];
-    const targetBlock = blocks.find(b => b.id === divd[0]);
-    if (targetBlock && validPositions1.some(pos => pos.x === targetBlock.x && pos.y === targetBlock.y)) {
-    console.log("✅ First block is in a valid position");
-    winning_start == 1;
-    } else {
-    console.log("❌ First block is NOT in a valid position");
-    }
-    const validPositions2 = [{ x: 180, y: 0 },{ x: 240, y: 60 },{ x: 210, y: 30 },{ x: 270, y: 90 }];
-    const targetBlock2 = blocks.find(b => b.id === divd[divd.length-1]);
-    if (targetBlock2 && validPositions2.some(pos => pos.x === targetBlock2.x && pos.y === targetBlock2.y)) {
-    console.log("✅ Last block is in a valid position");
-    winning_end == 1;
-    } else {
-    console.log("❌ Last block is NOT in a valid position");
-    }
-    if (winning_blocks == 1 && winning_start == 1 && winning_end == 1) {
+	if (winning_blocks == 1 && winning_start == 1 && winning_end == 1) {
     arena.innerHTML = "<h2>🎉 You win!</h2><p>Have another go if you think you're so great.</p>";
     }
 }
