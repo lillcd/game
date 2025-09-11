@@ -149,8 +149,8 @@ html_code = """
 <style>
 body { padding: 0px; margin: 0px; font-family: sans-serif; }
 .grid-container { display: grid; grid-template-columns: repeat(6, 60px); grid-template-rows: repeat(5, 60px); width: max-content; }
-.grid-cell { width: 60px; height: 60px; background-color: #eee; border: 1px solid #ccc; box-sizing: border-box; position: relative; }
-.draggable { width: 120px; height: 60px; background-color: #2E2E2E; cursor: grab; position: absolute; z-index: 10; border-radius: 7px; user-select: none; transition: transform-origin: center center; transform 0.25s ease; }
+.grid-cell { width: 60px; height: 60px; background-color: cornsilk; border: 1px solid #ccc; box-sizing: border-box; position: relative; }
+.draggable { width: 120px; height: 60px; background-color: cadetblue; cursor: grab; position: absolute; z-index: 10; border-radius: 7px; user-select: none; transition: transform-origin: center center; transform 0.25s ease; }
 .rotate-handle { width: 21px; height: 21px; background: none; position: absolute; cursor: pointer; z-index: 20; }
 .top-left { top: 0px; left: 0px; }
 .top-right { top: 0px; right: 0px; }
@@ -170,7 +170,7 @@ body { padding: 0px; margin: 0px; font-family: sans-serif; }
 #block8 { transform: rotate(-9deg); top: 498px; left: 95px; }
 #block9 { transform: rotate(-36deg); top: 490px; left: 240px; }
 .dvdr { position: absolute; background-color: #ffffff; height: 52px; top: 4px; left: 58px; width: 2px; }
-.strtfnsh { position: absolute; width: 60px; height: 60px; background-color: #2E2E2E; }
+.strtfnsh { position: absolute; width: 60px; height: 60px; background-color: cadetblue; }
 #strt { left: 0px; top: 240px; border-radius: 0px 7px 7px 0px; }
 #fnsh { left: 300px; top: 0px; border-radius: 7px 0px 0px 7px; }
 .strtfnsh .wrd { width: 100% !important; }
