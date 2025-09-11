@@ -471,7 +471,7 @@ function handleEnd(e) {
     } else {
     console.log("❌ Missing or incorrect blocks");
     }
-	if (winning_blocks == 1 && winning_start == 1 && winning_end == 1) {
+	if (isValidPosition) {
     arena.innerHTML = "<h2>🎉 You win!</h2><p>Have another go if you think you're so great.</p>";
     }
 }
