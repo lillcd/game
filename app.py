@@ -138,7 +138,7 @@ def render_round():
 
 # Hidden text_area to receive data from JS
 st.markdown("""
-<style>.stTextArea { display: none; } .stVerticalBlock { gap: 0.5rem !important; max-width: 360px !important; } div[data-testid="stLayoutWrapper"] { max-width: 360px; } .stMainBlockContainer { position: relative; overflow: hidden !important; padding-top: 55px !important; padding-right: 12px !important; padding-bottom: 45px !important; padding-left: 12px !important; } .stElementContainer:nth-of-type(2) { position: absolute; left: 12px; bottom: 12px; }</style>
+<style>.stTextArea { display: none; } .stVerticalBlock { gap: 0.5rem !important; max-width: 360px !important; } div[data-testid="stLayoutWrapper"] { max-width: 360px; } .stMainBlockContainer { min-height: 100vh; position: relative; overflow: hidden !important; padding-top: 55px !important; padding-right: 12px !important; padding-bottom: 45px !important; padding-left: 12px !important; } .stElementContainer:nth-of-type(2) { position: absolute; left: 12px; bottom: 12px; }</style>
 """, unsafe_allow_html=True)
 
          
@@ -150,7 +150,8 @@ html_code = """
 body { padding: 0px; margin: 0px; font-family: sans-serif; }
 .grid-container { display: grid; grid-template-columns: repeat(6, 60px); grid-template-rows: repeat(5, 60px); width: max-content; }
 .grid-cell { width: 60px; height: 60px; background-color: cornsilk; border: 1px solid #ccc; box-sizing: border-box; position: relative; }
-.draggable { width: 120px; height: 60px; background-color: cadetblue; cursor: grab; position: absolute; z-index: 10; border-radius: 7px; user-select: none; transition: transform-origin: center center; transform 0.25s ease; }
+.block { width: 120px; height: 60px; border-radius: 7px; background-color: cadetblue; transition: opacity 0.5s ease; }
+.draggable { cursor: grab; position: absolute; z-index: 10; user-select: none; transition: transform-origin: center center; transform 0.25s ease; }
 .rotate-handle { width: 21px; height: 21px; background: none; position: absolute; cursor: pointer; z-index: 20; }
 .top-left { top: 0px; left: 0px; }
 .top-right { top: 0px; right: 0px; }
@@ -176,7 +177,6 @@ body { padding: 0px; margin: 0px; font-family: sans-serif; }
 .strtfnsh .wrd { width: 100% !important; }
 @keyframes solvedGlow { 0% { box-shadow: 0 0 0px rgba(0, 255, 0, 0); } 20% { box-shadow: 0 0 12px 4px rgba(0, 255, 0, 0.8); } 100% { box-shadow: 0 0 0px rgba(0, 255, 0, 0); } }
 .block.slvd { animation: solvedGlow 2.5s ease-out; }
-.block { transition: opacity 0.5s ease; }
 .block.ntslvd { opacity: 0; }
 </style>
 
@@ -511,4 +511,4 @@ if st.session_state.round_html:
                 
 if st.session_state.show_text:
     st.title("💡 Welcome to the game!")
-    st.write("Make your way across the board from left to right by placing the dominoes in a line. Copyright (c) 2025 Chris Lilly")
+    st.write("Make your way across the board from left to right by placing the dominoes in a line, using hidden related links. In this example, the links are 'ORANGE' (Seville orange, Orange County) and 'Red' (Simply Red, Red herring). Copyright (c) 2025 Chris Lilly")
