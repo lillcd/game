@@ -30,8 +30,8 @@ rounds = {
         "end_word":   "Football",
     },
     "r4": {
-        "word_pairs": [("Night","Big"),("Red","Black"),("Bowl","Candle"),("Boat","Sour"),("Dresser","Go"),("File","Cloud"),("Car","Sad"),("Mac","Top"),("Hyacinth","Key")],
-        "correct_blocks": ["block1","block8","block4","block2","block9"],
+        "word_pairs": [("Night","Big"),("Red","Key"),("Bowl","Candle"),("Boat","Sour"),("Dresser","Go"),("File","Cloud"),("Car","Sad"),("Mac","Top"),("Cellar","Basket")],
+        "correct_blocks": ["block1","block8","block4","block2"],
         "start_word": "Carbon",
         "end_word":   "Green",
     },
@@ -78,13 +78,13 @@ rounds = {
         "end_word":   "Monkeys",
     },
     "r12": {
-        "word_pairs": [("Pack","Kick"),("Digger","Pump"),("Mulder","British"),("Whistle","Top"),("Deft","Leer"),("Lining","Fools"),("Cake","Party"),("Shorts","Wile E"),("Clip","Cry")],
+        "word_pairs": [("Whistle","Kick"),("Digger","Pump"),("Mulder","British"),("Barn","Top"),("Deft","Leer"),("Lining","Fools"),("Cake","Party"),("Shorts","Wile E"),("Clip","Cry")],
         "correct_blocks": ["block3","block9","block1","block8"],
         "start_word": "Silver",
         "end_word":   "Ugly",
     },
     "r13": {
-        "word_pairs": [("Juice","Dragon"),("Robot","Tech"),("Bat","Gypsy"),("Orchestra","Hallow"),("Metal","Pork"),("Habit","Weapon"),("Ball","Dung"),("Line","Jiminy"),("Graph","Mower")],
+        "word_pairs": [("Juice","Dragon"),("Robot","Tech"),("Bat","Gypsy"),("Ensemble","Hallow"),("Metal","Pork"),("Habit","Weapon"),("Ball","Dung"),("Line","Jiminy"),("Graph","Mower")],
         "correct_blocks": ["block8","block3","block7","block8"],
         "start_word": "Queen",
         "end_word":   "Fish",
@@ -94,6 +94,12 @@ rounds = {
         "correct_blocks": ["block5","block2","block8","block3"],
         "start_word": "Stage",
         "end_word":   "Elbow",
+    },
+    "r15": {
+        "word_pairs": [("Loose","Bended"),("Whites","Arm"),("Grease","Radio"),("Pablo","Mull"),("Bell","Jiminy"),("Habitat","Fool"),("Strong","Pig's"),("With","Shadow"),("Worm","Trench")],
+        "correct_blocks": ["block3","block7","block9","block1"],
+        "start_word": "Tennis",
+        "end_word":   "Jerk",
     }
 }
 
@@ -132,7 +138,7 @@ def render_round():
 
 # Hidden text_area to receive data from JS
 st.markdown("""
-<style>.stTextArea { display: none; } .stVerticalBlock { gap: 0.5rem !important; max-width: 360px !important; } div[data-testid="stLayoutWrapper"] { max-width: 360px; } .stMainBlockContainer { padding-bottom: 50px !important; }</style>
+<style>.stTextArea { display: none; } .stVerticalBlock { gap: 0.5rem !important; max-width: 360px !important; } div[data-testid="stLayoutWrapper"] { max-width: 360px; } .stMainBlockContainer { position: relative; overflow: hidden !important; padding-top: 55px !important; padding-right: 12px !important; padding-bottom: 45px !important; padding-left: 12px !important; } .stElementContainer:nth-of-type(2) { position: absolute; left: 12px; bottom: 12px; }</style>
 """, unsafe_allow_html=True)
 
          
@@ -145,7 +151,7 @@ body { padding: 0px; margin: 0px; font-family: sans-serif; }
 .grid-container { display: grid; grid-template-columns: repeat(6, 60px); grid-template-rows: repeat(5, 60px); width: max-content; }
 .grid-cell { width: 60px; height: 60px; background-color: #eee; border: 1px solid #ccc; box-sizing: border-box; position: relative; }
 .draggable { width: 120px; height: 60px; background-color: #2E2E2E; cursor: grab; position: absolute; z-index: 10; border-radius: 7px; user-select: none; transition: transform-origin: center center; transform 0.25s ease; }
-.rotate-handle { width: 20px; height: 20px; background: none; position: absolute; cursor: pointer; z-index: 20; }
+.rotate-handle { width: 21px; height: 21px; background: none; position: absolute; cursor: pointer; z-index: 20; }
 .top-left { top: 0px; left: 0px; }
 .top-right { top: 0px; right: 0px; }
 .bottom-left { bottom: 0px; left: 0px; }
@@ -170,7 +176,10 @@ body { padding: 0px; margin: 0px; font-family: sans-serif; }
 .strtfnsh .wrd { width: 100% !important; }
 @keyframes solvedGlow { 0% { box-shadow: 0 0 0px rgba(0, 255, 0, 0); } 20% { box-shadow: 0 0 12px 4px rgba(0, 255, 0, 0.8); } 100% { box-shadow: 0 0 0px rgba(0, 255, 0, 0); } }
 .block.slvd { animation: solvedGlow 2.5s ease-out; }
+.block { transition: opacity 0.5s ease; }
+.block.ntslvd { opacity: 0; }
 </style>
+
 <div id="arena">
 <div class="grid-container" id="grid">
 <!-- Create 30 grid cells -->
@@ -466,6 +475,9 @@ function handleEnd(e) {
 	);
 	if (isValidPosition) {
     divd.forEach(id => document.getElementById(id)?.classList.add("slvd"));
+    document.querySelectorAll(".block").forEach(block => {
+    if (!divd.includes(block.id)) block.classList.add("ntslvd");
+    });
     }
     } else {
     console.log("❌ Missing or incorrect blocks");
