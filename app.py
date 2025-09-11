@@ -468,11 +468,11 @@ function handleEnd(e) {
 	pos.x === testCoords[i].x && pos.y === testCoords[i].y
 	)
 	);
-    } else {
-    console.log("❌ Missing or incorrect blocks");
-    }
 	if (isValidPosition) {
     arena.innerHTML = "<h2>🎉 You win!</h2><p>Have another go if you think you're so great.</p>";
+    }
+    } else {
+    console.log("❌ Missing or incorrect blocks");
     }
 }
 document.addEventListener('mouseup', handleEnd);
