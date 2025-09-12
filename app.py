@@ -123,8 +123,8 @@ def simple_check(block_ids):
 def render_round():
     global current_round
     unused_rounds = [r for r in rounds.keys() if r not in st.session_state.used_rounds]
-    print(f"Used rounds so far: {st.session_state.used_rounds}")
     current_round = random.choice(unused_rounds) if unused_rounds else None
+    print(st.session_state.used_rounds)
     # print("🎲 Chosen round:", current_round)
     new_html = html_code
     for i, (w1, w2) in enumerate(rounds[current_round]['word_pairs'], start=1):
