@@ -55,7 +55,7 @@ rounds = {
     },
     "r8": {
         "word_pairs": [("Ball","Secret"),("South","Police"),("Guys","Matchbox"),("Coffee","Neptune"),("Sisters","U"),("Clarity","People"),("Gecko","Witty"),("CV","Famous"),("Shampoo","Arm")],
-        "correct_blocks": ["block7","block2","block8","block6"],
+        "correct_blocks": ["block1","block5","block8","block3"],
         "start_word": "After",
         "end_word":   "Questions",
     },
@@ -100,6 +100,12 @@ rounds = {
         "correct_blocks": ["block3","block7","block9","block1"],
         "start_word": "Tennis",
         "end_word":   "Jerk",
+    },
+    "r16": {
+        "word_pairs": [("Surf","Trafalgar"),("Yeast","Jelly"),("Moor","Transfer"),("Wars","Perfect"),("Giraffe","Buckle"),("Evolve","Nest"),("Weaken","I"),("Ring","Stunt"),("Lambast","Welly")],
+        "correct_blocks": ["block3","block7","block9","block1"],
+        "start_word": "North",
+        "end_word":   "Dance",
     }
 }
 
@@ -540,6 +546,6 @@ if st.session_state.round_html:
 if st.session_state.show_text:
     st.title("💡 Welcome to KeyWordPlay!")
     st.write("Make your way across the board from left to right by placing the blocks in a line, connecting them like dominoes using hidden related links. In this example, the links are 'ORANGE' (Seville orange, Orange County) and 'RED' (Simply red, red herring).")
-    components.html(demo_html_code), height=60, scrolling=False)
+    components.html(demo_html_code, height=60, scrolling=False)
     st.write("Copyright (c) 2025 Chris Lilly")
 
