@@ -138,7 +138,7 @@ def render_round():
 
 # Hidden text_area to receive data from JS
 st.markdown("""
-<style>.stTextArea { display: none; } .stVerticalBlock { gap: 0.5rem !important; max-width: 360px !important; } div[data-testid="stLayoutWrapper"] { max-width: 360px; } .stMainBlockContainer { min-height: 100vh; position: relative; overflow: hidden !important; padding-top: 55px !important; padding-right: 12px !important; padding-bottom: 45px !important; padding-left: 12px !important; } .stElementContainer:nth-of-type(2) { position: absolute; left: 12px; top: 12px; z-index: 999999; }</style>
+<style>.stTextArea { display: none; } .stVerticalBlock { gap: 0.5rem !important; max-width: 360px !important; } div[data-testid="stLayoutWrapper"] { max-width: 360px; } .stMainBlockContainer { min-height: 100vh; position: relative; overflow: hidden !important; padding-top: 55px !important; padding-right: 11px !important; padding-bottom: 45px !important; padding-left: 11px !important; } .stElementContainer:nth-of-type(2) { position: absolute; left: 11px; top: 12px; z-index: 999999; }</style>
 """, unsafe_allow_html=True)
 
          
