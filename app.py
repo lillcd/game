@@ -532,7 +532,7 @@ if st.session_state.round_html:
     components.html(st.session_state.round_html, height=582, scrolling=False)
                 
 if st.session_state.show_text:
-    st.title("💡 Welcome to KeyWordPlay!")
+    st.title("💡 Welcome to KeyWordGame!")
     st.write("Make your way across the board from left to right by placing the blocks in a line, connecting them like dominoes using hidden related links. In this example, the links are 'ORANGE' (Seville orange, Orange County) and 'RED' (Simply red, red herring).")
     components.html(demo_html_code, height=60, scrolling=False)
     st.markdown('<p style="font-size: 10px; color: gray; margin-top: 30px;">Copyright (c) 2025 Chris Lilly</p>', unsafe_allow_html=True)
