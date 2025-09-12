@@ -106,6 +106,12 @@ rounds = {
         "correct_blocks": ["block3","block7","block9","block1"],
         "start_word": "North",
         "end_word":   "Dance",
+    },
+    "r17": {
+        "word_pairs": [("Picking","Wire"),("Yeast","Jelly"),("Herb","Carrot"),("Misty","Roald"),("Peck","Tern"),("Pack","Crushed"),("Friends","Shed"),("Tip","Dot"),("Underground","Fishing")],
+        "correct_blocks": ["block8","block1","block6","block9"],
+        "start_word": "Marker",
+        "end_word":   "Profit",
     }
 }
 
@@ -503,22 +509,23 @@ document.addEventListener('touchend', handleEnd);
 
 demo_html_code = """
     <style>
-    .block { width: 120px; height: 60px; border-radius: 7px; background-color: cadetblue; transition: opacity 0.5s ease; }
+    iframe.stIFrame body { margin: 0px !important; }
+    .block { width: 120px; height: 60px; position: relative; display: inline-block; border-radius: 7px; background-color: cadetblue; transition: opacity 0.5s ease; }
     .wrd { color: #ffffff; font-size: 13px; position: absolute; top: 50%; width: 49%; text-align: center; text-anchor: middle; line-height: 0px; }
     .lwrd { left: 0; }
     .rwrd { right: 0; }
     </style>
-    <div class="draggable block">
+    <div class="block">
     <div class="wrd lwrd">Bell</div>
     <div class="wrd rwrd">Seville</div>
     <div class="dvdr"></div>
     </div>
-    <div class="draggable block">
+    <div class="block">
     <div class="wrd lwrd">County</div>
     <div class="wrd rwrd">Simply</div>
     <div class="dvdr"></div>
     </div>
-	<div class="draggable block">
+	<div class="block">
     <div class="wrd lwrd">Herring</div>
     <div class="wrd rwrd">Pea</div>
     <div class="dvdr"></div>
