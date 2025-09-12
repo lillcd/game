@@ -9,6 +9,9 @@ import json
 import streamlit as st
 import streamlit.components.v1 as components
 
+if "used_rounds" not in st.session_state:
+    st.session_state.used_rounds = []
+    
 
 rounds = {
     "r1": {
