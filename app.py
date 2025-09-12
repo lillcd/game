@@ -9,9 +9,6 @@ import json
 import streamlit as st
 import streamlit.components.v1 as components
 
-if "used_rounds" not in st.session_state:
-    st.session_state.used_rounds = []
-    
 
 rounds = {
     "r1": {
@@ -125,13 +122,7 @@ def simple_check(block_ids):
     
 def render_round():
     global current_round
-    available = [r for r in rounds if r not in st.session_state.get("used_rounds", [])]
-    if not available:
-        st.session_state.used_rounds = []
-        available = list(rounds.keys())
-    current_round = random.choice(available)
-    st.session_state.used_rounds.append(current_round)
-    return rounds[current_round]
+    current_round = random.choice(list(rounds.keys()))
     # print("🎲 Chosen round:", current_round)
     new_html = html_code
     for i, (w1, w2) in enumerate(rounds[current_round]['word_pairs'], start=1):
