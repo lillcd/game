@@ -509,11 +509,12 @@ document.addEventListener('touchend', handleEnd);
 
 demo_html_code = """
     <style>
-    iframe.stIFrame body { margin: 0px !important; }
+    body { margin: 0px !important; font-family: sans-serif; }
     .block { width: 120px; height: 60px; position: relative; display: inline-block; border-radius: 7px; background-color: cadetblue; transition: opacity 0.5s ease; }
     .wrd { color: #ffffff; font-size: 13px; position: absolute; top: 50%; width: 49%; text-align: center; text-anchor: middle; line-height: 0px; }
     .lwrd { left: 0; }
     .rwrd { right: 0; }
+    .dvdr { position: absolute; background-color: #ffffff; height: 52px; top: 4px; left: 58px; width: 2px; }
     </style>
     <div class="block">
     <div class="wrd lwrd">Bell</div>
@@ -554,5 +555,5 @@ if st.session_state.show_text:
     st.title("💡 Welcome to KeyWordPlay!")
     st.write("Make your way across the board from left to right by placing the blocks in a line, connecting them like dominoes using hidden related links. In this example, the links are 'ORANGE' (Seville orange, Orange County) and 'RED' (Simply red, red herring).")
     components.html(demo_html_code, height=60, scrolling=False)
-    st.write("Copyright (c) 2025 Chris Lilly")
+    st.smallprint("Copyright (c) 2025 Chris Lilly")
 
