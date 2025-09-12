@@ -122,7 +122,9 @@ def simple_check(block_ids):
     
 def render_round():
     global current_round
-    current_round = random.choice(list(rounds.keys()))
+    unused_rounds = [r for r in rounds.keys() if r not in st.session_state.used_rounds]
+    print(f"Used rounds so far: {st.session_state.used_rounds}")
+    current_round = random.choice(unused_rounds) if unused_rounds else None
     # print("🎲 Chosen round:", current_round)
     new_html = html_code
     for i, (w1, w2) in enumerate(rounds[current_round]['word_pairs'], start=1):
@@ -141,6 +143,11 @@ def render_round():
 
 
 
+
+if "used_rounds" not in st.session_state:
+    st.session_state.used_rounds = []
+    
+    
 
 # Hidden text_area to receive data from JS
 st.markdown("""
