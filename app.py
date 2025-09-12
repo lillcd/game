@@ -511,4 +511,30 @@ if st.session_state.round_html:
                 
 if st.session_state.show_text:
     st.title("💡 Welcome to KeyWordPlay!")
-    st.write("Make your way across the board from left to right by placing the blocks in a line, connecting them like dominoes using hidden related links. For example, 'Key' could be placed next to 'Play' using the hidden link 'Word' (Key word, Word play). Copyright (c) 2025 Chris Lilly")
+    st.write("Make your way across the board from left to right by placing the blocks in a line, connecting them like dominoes using hidden related links. In this example, the links are 'ORANGE' (Seville orange, Orange County) and 'RED' (Simply red, red herring).")
+    demo_html_code = """
+    <style>
+    .block { width: 120px; height: 60px; border-radius: 7px; background-color: cadetblue; transition: opacity 0.5s ease; }
+    .wrd { color: #ffffff; font-size: 13px; position: absolute; top: 50%; width: 49%; text-align: center; text-anchor: middle; line-height: 0px; }
+    .lwrd { left: 0; }
+    .rwrd { right: 0; }
+    </style>
+    <div class="draggable block">
+    <div class="wrd lwrd">Bell</div>
+    <div class="wrd rwrd">Seville</div>
+    <div class="dvdr"></div>
+    </div>
+    <div class="draggable block">
+    <div class="wrd lwrd">County</div>
+    <div class="wrd rwrd">Simply</div>
+    <div class="dvdr"></div>
+    </div>
+	<div class="draggable block">
+    <div class="wrd lwrd">Herring</div>
+    <div class="wrd rwrd">Pea</div>
+    <div class="dvdr"></div>
+    </div>
+    """"
+    display(HTML(demo_html_code))
+    st.write("Copyright (c) 2025 Chris Lilly")
+
