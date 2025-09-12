@@ -495,24 +495,7 @@ document.addEventListener('touchend', handleEnd);
 
 
 
-if "show_text" not in st.session_state:
-    st.session_state.show_text = True
-
-if "round_html" not in st.session_state:
-    st.session_state.round_html = ""
-
-if st.button("New game"):
-        st.session_state.show_text = False
-        st.session_state.round_html = render_round()  # <-- YOUR FUNCTION
-
-# --- Display game (HTML blocks) ---
-if st.session_state.round_html:
-    components.html(st.session_state.round_html, height=582)
-                
-if st.session_state.show_text:
-    st.title("💡 Welcome to KeyWordPlay!")
-    st.write("Make your way across the board from left to right by placing the blocks in a line, connecting them like dominoes using hidden related links. In this example, the links are 'ORANGE' (Seville orange, Orange County) and 'RED' (Simply red, red herring).")
-    demo_html_code = """
+demo_html_code = """
     <style>
     .block { width: 120px; height: 60px; border-radius: 7px; background-color: cadetblue; transition: opacity 0.5s ease; }
     .wrd { color: #ffffff; font-size: 13px; position: absolute; top: 50%; width: 49%; text-align: center; text-anchor: middle; line-height: 0px; }
@@ -534,7 +517,29 @@ if st.session_state.show_text:
     <div class="wrd rwrd">Pea</div>
     <div class="dvdr"></div>
     </div>
-    """"
+""""
+    
+    
+    
+    
+
+if "show_text" not in st.session_state:
+    st.session_state.show_text = True
+
+if "round_html" not in st.session_state:
+    st.session_state.round_html = ""
+
+if st.button("New game"):
+        st.session_state.show_text = False
+        st.session_state.round_html = render_round()  # <-- YOUR FUNCTION
+
+# --- Display game (HTML blocks) ---
+if st.session_state.round_html:
+    components.html(st.session_state.round_html, height=582)
+                
+if st.session_state.show_text:
+    st.title("💡 Welcome to KeyWordPlay!")
+    st.write("Make your way across the board from left to right by placing the blocks in a line, connecting them like dominoes using hidden related links. In this example, the links are 'ORANGE' (Seville orange, Orange County) and 'RED' (Simply red, red herring).")
     display(HTML(demo_html_code))
     st.write("Copyright (c) 2025 Chris Lilly")
 
