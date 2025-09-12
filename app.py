@@ -162,7 +162,7 @@ html_code = """
 body { padding: 0px; margin: 0px; font-family: sans-serif; }
 .grid-container { display: grid; grid-template-columns: repeat(6, 60px); grid-template-rows: repeat(5, 60px); width: max-content; }
 .grid-cell { width: 60px; height: 60px; background-color: cornsilk; border: 1px solid #ccc; box-sizing: border-box; position: relative; }
-.block { width: 120px; height: 60px; border-radius: 7px; background-color: cadetblue; transition: opacity 0.5s ease; }
+.block { width: 120px; height: 60px; border-radius: 8px; background-color: cadetblue; transition: opacity 0.5s ease; }
 .draggable { cursor: grab; position: absolute; z-index: 10; user-select: none; transition: transform-origin: center center; transform 0.25s ease; }
 .rotate-handle { width: 21px; height: 21px; background: none; position: absolute; cursor: pointer; z-index: 20; }
 .top-left { top: 0px; left: 0px; }
@@ -184,8 +184,8 @@ body { padding: 0px; margin: 0px; font-family: sans-serif; }
 #block9 { transform: rotate(-36deg); top: 490px; left: 240px; }
 .dvdr { position: absolute; background-color: #ffffff; height: 52px; top: 4px; left: 58px; width: 2px; }
 .strtfnsh { position: absolute; width: 60px; height: 60px; background-color: cadetblue; }
-#strt { left: 0px; top: 240px; border-radius: 0px 7px 7px 0px; }
-#fnsh { left: 300px; top: 0px; border-radius: 7px 0px 0px 7px; }
+#strt { left: 0px; top: 240px; border-radius: 0px 8px 8px 0px; }
+#fnsh { left: 300px; top: 0px; border-radius: 8px 0px 0px 8px; }
 .strtfnsh .wrd { width: 100% !important; }
 @keyframes solvedGlow { 0% { box-shadow: 0 0 0px rgba(0, 255, 0, 0); } 20% { box-shadow: 0 0 12px 4px rgba(0, 255, 0, 0.8); } 100% { box-shadow: 0 0 0px rgba(0, 255, 0, 0); } }
 .block.slvd { animation: solvedGlow 2.5s ease-out; }
@@ -510,27 +510,13 @@ document.addEventListener('touchend', handleEnd);
 demo_html_code = """
     <style>
     body { margin: 0px !important; font-family: sans-serif; }
-    .block { width: 120px; height: 60px; position: relative; display: inline-block; border-radius: 7px; background-color: cadetblue; transition: opacity 0.5s ease; }
+    .block { width: 120px; height: 60px; position: relative; display: inline-block; border-radius: 8px; background-color: cadetblue; transition: opacity 0.5s ease; }
     .wrd { color: #ffffff; font-size: 13px; position: absolute; top: 50%; width: 49%; text-align: center; text-anchor: middle; line-height: 0px; }
     .lwrd { left: 0; }
     .rwrd { right: 0; }
     .dvdr { position: absolute; background-color: #ffffff; height: 52px; top: 4px; left: 58px; width: 2px; }
     </style>
-    <div class="block">
-    <div class="wrd lwrd">Bell</div>
-    <div class="wrd rwrd">Seville</div>
-    <div class="dvdr"></div>
-    </div>
-    <div class="block">
-    <div class="wrd lwrd">County</div>
-    <div class="wrd rwrd">Simply</div>
-    <div class="dvdr"></div>
-    </div>
-	<div class="block">
-    <div class="wrd lwrd">Herring</div>
-    <div class="wrd rwrd">Pea</div>
-    <div class="dvdr"></div>
-    </div>
+    <div class="block"><div class="wrd lwrd">Bell</div><div class="wrd rwrd">Seville</div><div class="dvdr"></div></div><div class="block"><div class="wrd lwrd">County</div><div class="wrd rwrd">Simply</div><div class="dvdr"></div></div><div class="block"><div class="wrd lwrd">Herring</div><div class="wrd rwrd">Pea</div><div class="dvdr"></div></div>
 """
     
     
@@ -555,5 +541,5 @@ if st.session_state.show_text:
     st.title("💡 Welcome to KeyWordPlay!")
     st.write("Make your way across the board from left to right by placing the blocks in a line, connecting them like dominoes using hidden related links. In this example, the links are 'ORANGE' (Seville orange, Orange County) and 'RED' (Simply red, red herring).")
     components.html(demo_html_code, height=60, scrolling=False)
-    st.markdown('<p style="font-size: 10px; color: gray;">Copyright (c) 2025 Chris Lilly</p>', unsafe_allow_html=True)
+    st.markdown('<p style="font-size: 10px; color: gray; margin-top: 30px;">Copyright (c) 2025 Chris Lilly</p>', unsafe_allow_html=True)
 
