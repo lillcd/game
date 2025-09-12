@@ -106,12 +106,6 @@ rounds = {
         "correct_blocks": ["block3","block7","block9","block1"],
         "start_word": "North",
         "end_word":   "Dance",
-    },
-    "r17": {
-        "word_pairs": [("Picking","Wire"),("Yeast","Jelly"),("Herb","Carrot"),("Misty","Roald"),("Peck","Tern"),("Pack","Crushed"),("Friends","Shed"),("Tip","Dot"),("Underground","Fishing")],
-        "correct_blocks": ["block8","block1","block6","block9"],
-        "start_word": "Marker",
-        "end_word":   "Profit",
     }
 }
 
