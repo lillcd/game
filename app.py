@@ -122,7 +122,13 @@ def simple_check(block_ids):
     
 def render_round():
     global current_round
-    current_round = random.choice(list(rounds.keys()))
+    available = [r for r in rounds if r not in st.session_state.get("used_rounds", [])]
+    if not available:
+        st.session_state.used_rounds = []
+        available = list(rounds.keys())
+    current_round = random.choice(available)
+    st.session_state.used_rounds.append(current_round)
+    return rounds[current_round]
     # print("🎲 Chosen round:", current_round)
     new_html = html_code
     for i, (w1, w2) in enumerate(rounds[current_round]['word_pairs'], start=1):
@@ -525,7 +531,7 @@ if "round_html" not in st.session_state:
 
 if st.button("New game"):
         st.session_state.show_text = False
-        st.session_state.round_html = render_round()  # <-- YOUR FUNCTION
+        st.session_state.round_html = render_round() 
 
 # --- Display game (HTML blocks) ---
 if st.session_state.round_html:
