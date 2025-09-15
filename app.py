@@ -106,6 +106,12 @@ rounds = {
         "correct_blocks": ["block4","block7","block8","block1"],
         "start_word": "North",
         "end_word":   "Dance",
+    },
+    "r17": {
+        "word_pairs": [("Pepper","Cape"),("Sugar","Wreath"),("Hamper","Giggle"),("Bill","Drain"),("Hampton","Kindle"),("Brick","Fold"),("Donor","Taco"),("Baffle","Fiend"),("Dream","Ear")],
+        "correct_blocks": ["block7","block1","block4","block9"],
+        "start_word": "Internal",
+        "end_word":   "Roll",
     }
 }
 
@@ -130,11 +136,12 @@ if "used_rounds" not in st.session_state:
 def render_round():
     global current_round
     unused_rounds = [r for r in rounds.keys() if r not in st.session_state.used_rounds]
-    if unused_rounds:
-        current_round = random.choice(unused_rounds)
-        st.session_state.used_rounds.append(current_round)
-    else:
-        current_round = None
+	if not unused_rounds:
+        # All rounds used — reset as all played
+        st.session_state.used_rounds = []
+        unused_rounds = list(rounds.keys())
+    current_round = random.choice(unused_rounds)
+    st.session_state.used_rounds.append(current_round)
     # print("🎲 Chosen round:", current_round)
     new_html = html_code
     for i, (w1, w2) in enumerate(rounds[current_round]['word_pairs'], start=1):
@@ -518,7 +525,7 @@ document.addEventListener('touchend', handleEnd);
 demo_html_code = """
     <style>
     body { margin: 0px !important; font-family: sans-serif; }
-    .block { width: 120px; height: 60px; position: relative; display: inline-block; border-radius: 8px; background-color: cadetblue; transition: opacity 0.5s ease; }
+    .block { width: 120px; height: 60px; border: 1px solid #ccc; box-sizing: border-box; position: relative; display: inline-block; border-radius: 8px; background-color: cadetblue; transition: opacity 0.5s ease; }
     .wrd { color: #ffffff; font-size: 13px; position: absolute; top: 50%; width: 49%; text-align: center; text-anchor: middle; line-height: 0px; }
     .lwrd { left: 0; }
     .rwrd { right: 0; }
