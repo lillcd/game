@@ -102,8 +102,8 @@ rounds = {
         "end_word":   "Jerk",
     },
     "r16": {
-        "word_pairs": [("Surf","Trafalgar"),("Yeast","Jelly"),("Moor","Transfer"),("Wars","Perfect"),("Giraffe","Buckle"),("Evolve","Nest"),("Weaken","I"),("Ring","Stunt"),("Lambast","Welly")],
-        "correct_blocks": ["block3","block7","block9","block1"],
+        "word_pairs": [("Surf","Trafalgar"),("Yeast","Jelly"),("Moor","Transfer"),("Wars","Perfect"),("Giraffe","Buckle"),("Evolve","Nest"),("Line","Rough"),("Ring","Stunt"),("Lambast","Welly")],
+        "correct_blocks": ["block4","block7","block8","block1"],
         "start_word": "North",
         "end_word":   "Dance",
     }
@@ -118,13 +118,23 @@ def simple_check(block_ids):
     encoded = [n * 31 for n in nums]  # e.g., [217, 62, 248, 186]
     return encoded
     
-    
+
+
+
+if "used_rounds" not in st.session_state:
+    st.session_state.used_rounds = []  
+
+
+
     
 def render_round():
     global current_round
     unused_rounds = [r for r in rounds.keys() if r not in st.session_state.used_rounds]
-    current_round = random.choice(unused_rounds) if unused_rounds else None
-    print(st.session_state.used_rounds)
+    if unused_rounds:
+        current_round = random.choice(unused_rounds)
+        st.session_state.used_rounds.append(current_round)
+    else:
+        current_round = None
     # print("🎲 Chosen round:", current_round)
     new_html = html_code
     for i, (w1, w2) in enumerate(rounds[current_round]['word_pairs'], start=1):
@@ -143,9 +153,6 @@ def render_round():
 
 
 
-
-if "used_rounds" not in st.session_state:
-    st.session_state.used_rounds = []
     
     
 
