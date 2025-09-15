@@ -194,9 +194,9 @@ body { padding: 0px; margin: 0px; font-family: sans-serif; }
 #block4 { transform: rotate(16deg); top: 393px; left: 4px; }
 #block5 { transform: rotate(0deg); top: 377px; left: 242px; }
 #block6 { transform: rotate(-70deg); top: 487px; left: -8px; }
-#block7 { transform: rotate(24deg); top: 430px; left: 161px; }
+#block7 { transform: rotate(24deg); top: 430px; left: 160px; }
 #block8 { transform: rotate(-9deg); top: 498px; left: 95px; }
-#block9 { transform: rotate(-36deg); top: 490px; left: 240px; }
+#block9 { transform: rotate(-36deg); top: 490px; left: 237px; }
 .dvdr { position: absolute; background-color: #ffffff; height: 52px; top: 4px; left: 58px; width: 2px; }
 .strtfnsh { position: absolute; width: 60px; height: 60px; background-color: cadetblue; }
 #strt { left: 0px; top: 240px; border-radius: 0px 8px 8px 0px; }
