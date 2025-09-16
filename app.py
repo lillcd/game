@@ -112,6 +112,12 @@ rounds = {
         "correct_blocks": ["block7","block1","block4","block9"],
         "start_word": "Internal",
         "end_word":   "Roll",
+    },
+    "r18": {
+        "word_pairs": [("Prop","Crate"),("Hands","Scrap"),("Soil","Waft"),("Estate","Hubris"),("Side","Acid"),("Melon","Trout"),("Detector","K"),("Stu","Cross"),("Blind","Milton")],
+        "correct_blocks": ["block8","block5","block2","block7"],
+        "start_word": "Roller",
+        "end_word":   "Tart",
     }
 }
 
