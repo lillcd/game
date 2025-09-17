@@ -118,6 +118,12 @@ rounds = {
         "correct_blocks": ["block8","block5","block2","block7"],
         "start_word": "Roller",
         "end_word":   "Tart",
+    },
+    "r19": {
+        "word_pairs": [("Parts","In"),("Pepper's","C"),("Fibrous","Felon"),("Ribbon","Tact"),("Slides","Tamper"),("Kirk","Gunnery"),("Lurch","Laugh"),("Tom","Go"),("Doorway","Stare")],
+        "correct_blocks": ["block6","block2","block8","block1"],
+        "start_word": "Team",
+        "end_word":   "Store",
     }
 }
 
@@ -560,7 +566,7 @@ if st.session_state.round_html:
                 
 if st.session_state.show_text:
     st.title("👋 Welcome to Confusebox! 🥴")
-    st.write("Make your way across the board by placing the blocks in a line, connecting them like dominoes using hidden related links. In this example, the links are 'ORANGE' (Seville orange, Orange County) and 'RED' (Simply red, red herring).")
+    st.write("Make your way across the board by placing the blocks in a line, connecting them like dominoes using hidden related links. In this example, the links are 'ORANGE' (Seville orange, Orange County) and 'RED' (Simply Red, Red herring).")
     components.html(demo_html_code, height=60, scrolling=False)
     st.markdown('<p style="font-size: 10px; color: gray; margin-top: 30px;">Copyright (c) 2025 Chris Lilly</p>', unsafe_allow_html=True)
 
