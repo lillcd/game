@@ -84,8 +84,8 @@ rounds = {
         "end_word":   "Ugly",
     },
     "r13": {
-        "word_pairs": [("Juice","Dragon"),("Robot","Tech"),("Bat","Gypsy"),("Ensemble","Hallow"),("Metal","Pork"),("Habit","Weapon"),("Ball","Dung"),("Line","Jiminy"),("Graph","Mower")],
-        "correct_blocks": ["block8","block3","block7","block8"],
+        "word_pairs": [("Juice","Dragon"),("Robot","Tech"),("Whites","Gypsy"),("Margin","Hallow"),("Metal","Pork"),("Habit","Weapon"),("Ball","Dung"),("Line","Jiminy"),("Graph","Mower")],
+        "correct_blocks": ["block8","block3","block7","block1"],
         "start_word": "Queen",
         "end_word":   "Fish",
     },
@@ -96,7 +96,7 @@ rounds = {
         "end_word":   "Elbow",
     },
     "r15": {
-        "word_pairs": [("Loose","Bended"),("Whites","Arm"),("Grease","Radio"),("Pablo","Mull"),("Bell","Jiminy"),("Habitat","Fool"),("Strong","Pig's"),("With","Shadow"),("Worm","Trench")],
+        "word_pairs": [("Loose","Bended"),("Char","Arm"),("Grease","Radio"),("Pablo","Mull"),("Bell","Jiminy"),("Habitat","Fool"),("Strong","Pig's"),("With","Shadow"),("Worm","Trench")],
         "correct_blocks": ["block3","block7","block9","block1"],
         "start_word": "Tennis",
         "end_word":   "Jerk",
