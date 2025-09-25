@@ -126,10 +126,16 @@ rounds = {
         "end_word":   "Store",
     },
     "r20": {
-        "word_pairs": [("Rod","Mushroom"),("9","Sand"),("Mango","Pudding"),("Turbine","Purple"),("Crops","Target"),("Rupert","Asunder"),("Bungle","Meet"),("Bow","Greased"),("Feat","Forced")],
+        "word_pairs": [("Rod","Tropic"),("Cats","Sand"),("Mango","Pudding"),("Turbine","Purple"),("Crops","Target"),("Rupert","Asunder"),("Bungle","Meet"),("Bow","Greased"),("Feat","Forced")],
         "correct_blocks": ["block4","block8","block1","block2"],
         "start_word": "Break",
         "end_word":   "Trooper",
+    },
+    "r21": {
+        "word_pairs": [("Zorb","Spoons"),("It","Queen"),("Gavel","Grail"),("Nordic","Muffs"),("Ted","Second"),("Linford","Astute"),("Act","Founding"),("Bracket","Screen"),("Hubbard","Great")],
+        "correct_blocks": ["block7","block5","block2","block9"],
+        "start_word": "Soul",
+        "end_word":   "Clock",
     }
 }
 
