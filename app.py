@@ -48,7 +48,7 @@ rounds = {
         "end_word":   "Head",
     },
     "r7": {
-        "word_pairs": [("Sonic","Leg"),("Mark","Hell's"),("For","Fifty"),("Doctor","French"),("MBE","Port"),("Abroad","Guest"),("Lizard","Albert"),("Counter","Under"),("Greek","Double")],
+        "word_pairs": [("Sonic","Leg"),("Mark","Hell's"),("Flour","Fifty"),("Doctor","French"),("MBE","Port"),("Abroad","Guest"),("Lizard","Albert"),("Counter","Under"),("Greek","Double")],
         "correct_blocks": ["block7","block2","block8","block6"],
         "start_word": "Airport",
         "end_word":   "Eyes",
@@ -60,7 +60,7 @@ rounds = {
         "end_word":   "Questions",
     },
     "r9": {
-        "word_pairs": [("Berry","Cold"),("West","News"),("Reliant","Golden"),("Tea","Mars"),("X","Harris"),("Teeth","Turtle"),("Rake","Magnolia"),("Tomb","Jaw"),("Tail","Sheryl")],
+        "word_pairs": [("Berry","Cold"),("West","News"),("Reliant","Golden"),("Tea","Mars"),("X","Tweed"),("Teeth","Turtle"),("Rake","Magnolia"),("Tomb","Jaw"),("Tail","Sheryl")],
         "correct_blocks": ["block3","block1","block6","block9"],
         "start_word": "Round",
         "end_word":   "Bar",
@@ -124,6 +124,12 @@ rounds = {
         "correct_blocks": ["block6","block2","block8","block1"],
         "start_word": "Team",
         "end_word":   "Store",
+    },
+    "r20": {
+        "word_pairs": [("Rod","Mushroom"),("9","Sand"),("Mango","Pudding"),("Turbine","Purple"),("Crops","Target"),("Rupert","Asunder"),("Bungle","Meet"),("Bow","Greased"),("Feat","Forced")],
+        "correct_blocks": ["block4","block8","block1","block2"],
+        "start_word": "Break",
+        "end_word":   "Trooper",
     }
 }
 
