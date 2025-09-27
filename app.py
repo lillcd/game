@@ -136,6 +136,12 @@ rounds = {
         "correct_blocks": ["block7","block5","block2","block9"],
         "start_word": "Soul",
         "end_word":   "Clock",
+    },
+    "r22": {
+        "word_pairs": [("Shank","Kobe"),("Fergus","Deal"),("Fence","Walked"),("Eater","Sitting"),("Theo","Regent"),("Easel","Dearly"),("Bill","Pulled"),("Brace","Pint"),("Tonight","Larry")],
+        "correct_blocks": ["block9","block1","block4","block7"],
+        "start_word": "Funky",
+        "end_word":   "Scratching",
     }
 }
 
