@@ -138,7 +138,7 @@ rounds = {
         "end_word":   "Clock",
     },
     "r22": {
-        "word_pairs": [("Shank","Kobe"),("Fergus","Deal"),("Fence","Walked"),("Eater","Sitting"),("Theo","Regent"),("Easel","Dearly"),("Bill","Pulled"),("Brace","Pint"),("Tonight","Larry")],
+        "word_pairs": [("Shank","Kobe"),("Fergus","Deal"),("Fennel","Walked"),("Eater","Sitting"),("Theo","Regent"),("Easel","Dearly"),("Bill","Pulled"),("Brace","Pint"),("Tonight","Larry")],
         "correct_blocks": ["block9","block1","block4","block7"],
         "start_word": "Funky",
         "end_word":   "Scratching",
@@ -148,6 +148,12 @@ rounds = {
         "correct_blocks": ["block5","block8","block2","block4"],
         "start_word": "Baking",
         "end_word":   "Court",
+    },
+    "r24": {
+        "word_pairs": [("Mayor","Disney"),("Traitor","Gearing"),("Dracula","Daisy"),("Feral","Jaguar"),("Leia","Drama"),("Suppose","Crane"),("Darren","Torn"),("Ellington","War`"),("Gladly","Fern")],
+        "correct_blocks": ["block3","block8","block1","block5"],
+        "start_word": "Pollen",
+        "end_word":   "Bee",
     }
 }
 
