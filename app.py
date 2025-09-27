@@ -142,6 +142,12 @@ rounds = {
         "correct_blocks": ["block9","block1","block4","block7"],
         "start_word": "Funky",
         "end_word":   "Scratching",
+    },
+    "r23": {
+        "word_pairs": [("Marble","Filler"),("Tooth","Beetle"),("Feeder","Grouse"),("Box","Butternut"),("Bread","Treading"),("Poser","Dreary"),("Farce","Tragic"),("Fall","Almond"),("Later","Stars")],
+        "correct_blocks": ["block5","block8","block2","block4"],
+        "start_word": "Baking",
+        "end_word":   "Court",
     }
 }
 
