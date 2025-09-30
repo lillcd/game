@@ -154,6 +154,24 @@ rounds = {
         "correct_blocks": ["block3","block8","block1","block5"],
         "start_word": "Pollen",
         "end_word":   "Bee",
+    },
+    "r25": {
+        "word_pairs": [("Job","Back"),("Prevent","Voted"),("Press","Bar"),("Tunnel","Puma"),("Harold","Garotte"),("Hair","Periodic"),("Harrass","Vector"),("Cloth","Help"),("Blink","Forlorn")],
+        "correct_blocks": ["block6","block8","block1","block3"],
+        "start_word": "Treasure",
+        "end_word":   "Sample",
+    },
+    "r26": {
+        "word_pairs": [("Sahara","Class"),("Football","Costume"),("X-ray","Dahlia"),("Panda","Strap"),("Club","Spaghetti"),("Sinew","Crafty"),("Torpedo","Trash"),("Fop","Warren"),("Replay","Final")],
+        "correct_blocks": ["block5","block1","block9","block2"],
+        "start_word": "Divine",
+        "end_word":   "Queen",
+    },
+    "r27": {
+        "word_pairs": [("Serbia","Rests"),("Bone","Smack"),("Tuba","Latterly"),("Ella","Red"),("Clump","Peony"),("Tricky","Crossing"),("Tornado","Handset"),("Attack","Sockeye"),("Hand","Dover")],
+        "correct_blocks": ["block8","block4","block2","block9"],
+        "start_word": "Loan",
+        "end_word":   "Trader",
     }
 }
 
