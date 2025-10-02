@@ -8,6 +8,7 @@ import random
 import json
 import streamlit as st
 import streamlit.components.v1 as components
+from datetime import date
 
 
 rounds = {
@@ -172,10 +173,35 @@ rounds = {
         "correct_blocks": ["block8","block4","block2","block9"],
         "start_word": "Loan",
         "end_word":   "Trader",
+    },
+    "r28": {
+        "word_pairs": [("Iceland","Flounce"),("Mousey","Hedges"),("Book","Sun"),("Chance","Rush"),("Proton","Reels"),("Gambia","Winsome"),("Eyelid","Cushion"),("Glass","Gap"),("Break","Fashion")],
+        "correct_blocks": ["block4","block8","block3","block9"],
+        "start_word": "Split",
+        "end_word":   "End",
+    },
+    "r29": {
+        "word_pairs": [("Pole","Member"),("Beer","Bryan"),("Horrid","Eaten"),("Lucid","Ankles"),("Rosary","Turbot"),("Shape","Show"),("Crossing","Shoulder"),("Wince","Brash"),("Rotund","Columns")],
+        "correct_blocks": ["block2","block7","block1","block6"],
+        "start_word": "Witch",
+        "end_word":   "Shoe",
     }
 }
 
 
+
+START_DATE = date(2025, 1, 1)
+
+
+
+
+
+def get_today_round_key():
+    today = date.today()
+    days_since_start = (today - START_DATE).days
+    round_keys = list(rounds.keys())
+    round_index = days_since_start % len(round_keys)  # Wrap around
+    return round_keys[round_index]
 
 
 
@@ -195,14 +221,15 @@ if "used_rounds" not in st.session_state:
     
 def render_round():
     global current_round
-    unused_rounds = [r for r in rounds.keys() if r not in st.session_state.used_rounds]
-    if not unused_rounds:
+    # unused_rounds = [r for r in rounds.keys() if r not in st.session_state.used_rounds]
+    # if not unused_rounds:
         # All rounds used — reset as all played
-        st.session_state.used_rounds = []
-        unused_rounds = list(rounds.keys())
-    current_round = random.choice(unused_rounds)
-    st.session_state.used_rounds.append(current_round)
+        # st.session_state.used_rounds = []
+        # unused_rounds = list(rounds.keys())
+    # current_round = random.choice(unused_rounds)
+    # st.session_state.used_rounds.append(current_round)
     # print("🎲 Chosen round:", current_round)
+    current_round = get_today_round_key()
     new_html = html_code
     for i, (w1, w2) in enumerate(rounds[current_round]['word_pairs'], start=1):
         new_html = new_html.replace(f"__BLOCK{i}_WORD1__", w1)
@@ -223,7 +250,6 @@ def render_round():
     
     
 
-# Hidden text_area to receive data from JS
 st.markdown("""
 <style>.stTextArea { display: none; } .stVerticalBlock { gap: 0.5rem !important; max-width: 360px !important; margin: auto !important; } div[data-testid="stLayoutWrapper"] { max-width: 360px; } .stMainBlockContainer { min-height: 100vh; position: relative; overflow: hidden !important; padding-top: 55px !important; padding-right: 11px !important; padding-bottom: 45px !important; padding-left: 11px !important; } .stElementContainer:nth-of-type(2) { position: absolute; left: 11px; top: 12px; z-index: 999999; }</style>
 """, unsafe_allow_html=True)
@@ -265,6 +291,7 @@ body { padding: 0px; margin: 0px; font-family: sans-serif; }
 @keyframes solvedGlow { 0% { box-shadow: 0 0 0px rgba(0, 255, 0, 0); } 20% { box-shadow: 0 0 12px 4px rgba(0, 255, 0, 0.8); } 100% { box-shadow: 0 0 0px rgba(0, 255, 0, 0); } }
 .block.slvd { animation: solvedGlow 2.5s ease-out; }
 .block.ntslvd { opacity: 0; }
+.comeback { display: block !important; }
 </style>
 
 <div id="arena">
@@ -368,15 +395,17 @@ document.getElementById('grid').appendChild(cell);
 <div class="wrd rwrd">__BLOCK9_WORD2__</div>
 <div class="dvdr"></div>
 </div>
+<div id="comeback" style="display: none; color: cadetblue;">Check back tomorrow for a new game!</div>
 </div>
 </div>
 
 <script>
 console.log("Received answer check:", blockref);
-const arena = document.getElementById("arena");
+const arena = document.getElementById('arena');
 const grid = document.getElementById('grid');
 const rect = grid.getBoundingClientRect();
 const blocks = document.querySelectorAll('.block');
+const comeback = document.getElementById('comeback');
 let activeBlock = null;
 let isDragging = false;
 let dragOffset = { x: 0, y: 0 };
@@ -562,6 +591,7 @@ function handleEnd(e) {
 	);
 	if (isValidPosition) {
     divd.forEach(id => document.getElementById(id)?.classList.add("slvd"));
+    comeback.classList.add("comeback");
     document.querySelectorAll(".block").forEach(block => {
     if (!divd.includes(block.id)) block.classList.add("ntslvd");
     });
@@ -604,7 +634,7 @@ if "show_text" not in st.session_state:
 if "round_html" not in st.session_state:
     st.session_state.round_html = ""
 
-if st.button("New game"):
+if st.button("Play"):
         st.session_state.show_text = False
         st.session_state.round_html = render_round() 
 
