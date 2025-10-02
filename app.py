@@ -646,5 +646,5 @@ if st.session_state.show_text:
     st.title("👋 Welcome to Confusebox! 🥴")
     st.write("Make your way across the board by placing the blocks in a line, connecting them like dominoes using hidden related links. In this example, the links are 'ORANGE' (Seville orange, Orange County) and 'RED' (Simply Red, Red herring).")
     components.html(demo_html_code, height=60, scrolling=False)
-    st.markdown('<p style="font-size: 10px; color: gray; margin-top: 30px;">Copyright (c) 2025 Chris Lilly. Enquiries:</p><img src="https://sarahlillystyling.com/wp-content/uploads/2025/10/eml.png" width="120" height="11" alt="Enquire" />', unsafe_allow_html=True)
+    st.markdown('<p style="font-size: 10px; color: gray; margin-top: 30px;">Copyright (c) 2025 Chris Lilly. Enquiries:</p><img src="https://raw.githubusercontent.com/lillcd/game/refs/heads/main/eml.png" width="137" height="12" alt="Enquire" />', unsafe_allow_html=True)
 
