@@ -395,7 +395,7 @@ document.getElementById('grid').appendChild(cell);
 <div class="wrd rwrd">__BLOCK9_WORD2__</div>
 <div class="dvdr"></div>
 </div>
-<div id="comeback" style="display: none; color: cadetblue;">Check back tomorrow for a new game!</div>
+<div id="comeback" style="display: none; color: cadetblue; margin-top: 12px;">👏 You cracked it – superb! Come back tomorrow for a new game!</div>
 </div>
 </div>
 
@@ -646,5 +646,5 @@ if st.session_state.show_text:
     st.title("👋 Welcome to Confusebox! 🥴")
     st.write("Make your way across the board by placing the blocks in a line, connecting them like dominoes using hidden related links. In this example, the links are 'ORANGE' (Seville orange, Orange County) and 'RED' (Simply Red, Red herring).")
     components.html(demo_html_code, height=60, scrolling=False)
-    st.markdown('<p style="font-size: 10px; color: gray; margin-top: 30px;">Copyright (c) 2025 Chris Lilly</p>', unsafe_allow_html=True)
+    st.markdown('<p style="font-size: 10px; color: gray; margin-top: 30px;">Copyright (c) 2025 Chris Lilly. Enquiries:</p><img src="https://sarahlillystyling.com/wp-content/uploads/2025/10/eml.png" width="120" height="11" alt="Enquire" />', unsafe_allow_html=True)
 
