@@ -185,6 +185,24 @@ rounds = {
         "correct_blocks": ["block2","block7","block1","block6"],
         "start_word": "Witch",
         "end_word":   "Shoe",
+    },
+    "r30": {
+        "word_pairs": [("Away","Cheer"),("Ballot","Flakes"),("Hearted","Laid"),("Clarks","Angeles"),("Pack","Copy"),("Devon","Savage"),("Benin","Ligament"),("Ordinal","Hosting"),("March","Eider")],
+        "correct_blocks": ["block9","block3","block5","block1"],
+        "start_word": "Straight",
+        "end_word":   "Set",
+    },
+    "r31": {
+        "word_pairs": [("Dew","Big"),("Season","Rap"),("Slogan","Hotspur"),("Sovreign","Mastic"),("Trounce","Garble"),("Quay","Brokeback"),("Billy","Widow's"),("Ordain","Bested"),("Judo","Frenetic")],
+        "correct_blocks": ["block7","block2","block6","block1"],
+        "start_word": "Notting",
+        "end_word":   "Stiller",
+    },
+    "r32": {
+        "word_pairs": [("Rack","Irish"),("Gallows","Pincer"),("Twitch","Herded"),("Cavalier","Anthem"),("Art","Par"),("Molten","Senegal"),("Jurrasic","Stoker"),("Off","Melba"),("Over","Lose")],
+        "correct_blocks": ["block8","block1","block5","block9"],
+        "start_word": "Tray",
+        "end_word":   "Punk",
     }
 }
 
