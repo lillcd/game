@@ -203,6 +203,12 @@ rounds = {
         "correct_blocks": ["block8","block1","block5","block9"],
         "start_word": "Tray",
         "end_word":   "Punk",
+    },
+    "r33": {
+        "word_pairs": [("Snippet","Marple"),("Over","Set"),("Proton","Ellipsis"),("Shade","Jousted"),("Opaque","Parry"),("Chair","Even"),("Loft","News"),("Crouton","Kibble"),("Age","Sonic")],
+        "correct_blocks": ["block6","block2","block7","block9"],
+        "start_word": "Below",
+        "end_word":   "Box",
     }
 }
 
